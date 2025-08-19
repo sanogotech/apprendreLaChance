@@ -2,6 +2,8 @@
 
 Le livre *"La chance ne sourit qu’aux audacieux"* de **Philippe Gabilliet**, professeur de psychologie sociale et spécialiste de l’optimisme, explore une idée fondamentale : **la chance est une compétence que l’on peut développer** et non un simple hasard.
 
+- https://youtu.be/a05UNoObCuI?si=GXaJX9waw2tjBrHN
+  
 ---
 
 ### 🎯 Pourquoi **la chance sourit-elle aux audacieux** selon Philippe Gabilliet ?
