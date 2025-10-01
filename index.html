@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Chance comme Compétence</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <style>
+    :root {
+      --primary-color: #2c3e50;
+      --secondary-color: #3498db;
+      --accent-color: #e74c3c;
+      --light-bg: #f8f9fa;
+      --dark-bg: #343a40;
+      --success-color: #27ae60;
+      --luck-gold: #f1c40f;
+    }
+
+    body {
+      background-color: var(--light-bg);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .navbar {
+      background-color: var(--primary-color);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      color: white;
+    }
+
+    .hero-section {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      color: white;
+      padding: 4rem 0;
+      margin-bottom: 3rem;
+      border-radius: 0 0 20px 20px;
+    }
+
+    .card {
+      border: none;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      height: 100%;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+
+    .card-header {
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: 600;
+    }
+
+    .module-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: var(--secondary-color);
+    }
+
+    .btn-primary {
+      background-color: var(--secondary-color);
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #2980b9;
+    }
+
+    .btn-luck {
+      background-color: var(--luck-gold);
+      color: #333;
+    }
+
+    .btn-luck:hover {
+      background-color: #f39c12;
+      color: #333;
+    }
+
+    .btn-outline-primary {
+      color: var(--secondary-color);
+      border-color: var(--secondary-color);
+    }
+
+    .btn-outline-primary:hover {
+      background-color: var(--secondary-color);
+      color: white;
+    }
+
+    .simulation-container {
+      background-color: white;
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+    }
+
+    .process-step {
+      position: relative;
+      padding-left: 30px;
+      margin-bottom: 20px;
+    }
+
+    .process-step:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 20px;
+      height: 20px;
+      background-color: var(--secondary-color);
+      border-radius: 50%;
+    }
+
+    .process-step:after {
+      content: "";
+      position: absolute;
+      left: 9px;
+      top: 20px;
+      width: 2px;
+      height: 100%;
+      background-color: var(--secondary-color);
+    }
+
+    .process-step:last-child:after {
+      display: none;
+    }
+
+    .data-table {
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+
+    .data-table th {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .highlight-box {
+      background-color: rgba(52, 152, 219, 0.1);
+      border-left: 4px solid var(--secondary-color);
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 0 5px 5px 0;
+    }
+
+    .luck-highlight {
+      background-color: rgba(241, 196, 15, 0.1);
+      border-left: 4px solid var(--luck-gold);
+    }
+
+    .linked-modules {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .linked-module {
+      background-color: var(--light-bg);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      color: var(--primary-color);
+      border: 1px solid #ddd;
+    }
+
+    .tab-content {
+      padding: 1.5rem 0;
+    }
+
+    footer {
+      background-color: var(--dark-bg);
+      color: white;
+      padding: 2rem 0;
+      margin-top: 3rem;
+    }
+
+    /* Animation pour les cartes */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .module-card {
+      animation: fadeIn 0.5s ease forwards;
+      opacity: 0;
+    }
+
+    /* Délai d'animation pour chaque carte */
+    .module-card:nth-child(1) { animation-delay: 0.1s; }
+    .module-card:nth-child(2) { animation-delay: 0.2s; }
+    .module-card:nth-child(3) { animation-delay: 0.3s; }
+    .module-card:nth-child(4) { animation-delay: 0.4s; }
+    .module-card:nth-child(5) { animation-delay: 0.5s; }
+    .module-card:nth-child(6) { animation-delay: 0.6s; }
+    .module-card:nth-child(7) { animation-delay: 0.7s; }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .hero-section {
+        padding: 2rem 0;
+      }
+
+      .module-icon {
+        font-size: 1.5rem;
+      }
+    }
+
+    .luck-meter {
+      height: 20px;
+      background-color: #e9ecef;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+
+    .luck-progress {
+      height: 100%;
+      background: linear-gradient(90deg, var(--luck-gold) 0%, #e67e22 100%);
+      transition: width 0.5s ease;
+    }
+
+    .luck-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1rem;
+    }
+
+    .luck-card {
+      background-color: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    .luck-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .luck-card h5 {
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
+
+    .luck-card .icon {
+      font-size: 2rem;
+      color: var(--luck-gold);
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark mb-4">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <i class="bi bi-clover me-2"></i>La Chance comme Compétence
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="#introduction">Introduction</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#types-chance">Types de Chance</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#pratiques">Pratiques</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#audace">L'Audace</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#simulations">Simulations</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#outils">Outils</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero-section">
+    <div class="container text-center">
+      <h1 class="display-4 fw-bold mb-3">Apprendre la Chance comme une Compétence</h1>
+      <p class="lead mb-4">Découvrez comment provoquer, développer et amplifier la chance dans tous les domaines de votre vie</p>
+      <div class="d-flex justify-content-center gap-3">
+        <a href="#introduction" class="btn btn-light btn-lg px-4">Commencer l'apprentissage</a>
+        <a href="#simulations" class="btn btn-outline-light btn-lg px-4">Tester les simulations</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="container mb-5">
+    <section class="mb-5">
+      <div class="row">
+        <div class="col-lg-8 mx-auto text-center">
+          <h2 class="mb-4">Pourquoi apprendre à provoquer sa chance ?</h2>
+          <p class="lead">La chance n'est pas un mystère inaccessible. C'est une compétence, une posture mentale et un art de vivre que l'on peut apprendre, développer et amplifier.</p>
+          <div class="d-flex justify-content-center mt-4">
+            <div class="px-4 text-center">
+              <i class="bi bi-lightning-charge fs-1 text-primary"></i>
+              <p class="mt-2 fw-bold">Provoquer</p>
+            </div>
+            <div class="px-4 text-center">
+              <i class="bi bi-arrow-repeat fs-1 text-primary"></i>
+              <p class="mt-2 fw-bold">Développer</p>
+            </div>
+            <div class="px-4 text-center">
+              <i class="bi bi-graph-up-arrow fs-1 text-primary"></i>
+              <p class="mt-2 fw-bold">Amplifier</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="introduction" class="mb-5">
+      <h2 class="text-center mb-4">Introduction : La Chance, Hasard ou Maîtrise ?</h2>
+      
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-header d-flex align-items-center">
+              <i class="bi bi-journal-bookmark me-2"></i>
+              <h5 class="mb-0">Changer de perspective</h5>
+            </div>
+            <div class="card-body">
+              <p>Beaucoup pensent que la chance est une faveur capricieuse du destin : certains en ont, d'autres non. Cette perspective est limitante.</p>
+              <div class="highlight-box">
+                <p><strong>La réalité :</strong> La chance suit des lois. Elle récompense :</p>
+                <ul>
+                  <li>Ceux qui <strong>se préparent sérieusement</strong></li>
+                  <li>Ceux qui <strong>osent, même quand ce n'est pas parfait</strong></li>
+                  <li>Ceux qui <strong>cultivent un bon état d'esprit</strong></li>
+                  <li>Et ceux qui <strong>n'abandonnent jamais après un échec</strong></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-header d-flex align-items-center">
+              <i class="bi bi-diagram-3 me-2"></i>
+              <h5 class="mb-0">L'équation de la chance</h5>
+            </div>
+            <div class="card-body">
+              <p>Selon Philippe Gabilliet, auteur de "La chance ne sourit qu'aux audacieux" :</p>
+              <div class="luck-highlight highlight-box">
+                <p class="text-center fw-bold fs-5">Préparation + Foi + Action régulière + Ouverture aux autres = Baraka et Succès</p>
+              </div>
+              <p class="mt-3">Cette perspective transforme la vie : au lieu d'attendre que « la chance tombe du ciel », vous devenez acteur de votre propre trajectoire.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="types-chance" class="mb-5">
+      <h2 class="text-center mb-4">Les 7 Types de Chance</h2>
+      
+      <div class="luck-grid mb-4">
+        <div class="luck-card">
+          <div class="icon">
+            <i class="bi bi-question-circle"></i>
+          </div>
+          <h5>Chance Aveugle (Hazard)</h5>
+          <p>Pure coïncidence. Vous n'avez rien fait de spécial.</p>
+          <p class="text-muted"><small>Exemple : Gagner à la loterie, trouver de l'argent dans la rue.</small></p>
+        </div>
+        
+        <div class="luck-card">
+          <div class="icon">
+            <i class="bi bi-arrow-repeat"></i>
+          </div>
+          <h5>Chance par la Persistance</h5>
+          <p>Vous augmentez les probabilités en essayant souvent, longtemps, avec ténacité.</p>
+          <p class="text-muted"><small>Exemple : Passer 10 concours pour enfin réussir.</small></p>
+        </div>
+        
+        <div class="luck-card">
+          <div class="icon">
+            <i class="bi bi-journal-check"></i>
+          </div>
+          <h5>Chance par la Préparation</h5>
+          <p>Vous êtes prêt au bon moment. Vous vous êtes préparé en amont.</p>
+          <p class="text-muted"><small>Exemple : CV à jour → opportunité surprise.</small></p>
+        </div>
+        
+        <div class="luck-card">
+          <div class="icon">
+            <i class="bi bi-award"></i>
+          </div>
+          <h5>Chance par Compétence</h5>
+          <p>Votre talent et votre expertise attirent naturellement les opportunités.</p>
+          <p class="text-muted"><small>Exemple : Être contacté pour un poste à cause de votre portfolio.</small></p>
+        </div>
+        
+        <div class="luck-card">
+          <div class="icon">
+            <i class="bi bi-person-check"></i>
+          </div>
+          <h5>Chance par Réputation</h5>
+          <p>Votre image, votre intégrité, votre gentillesse font que les autres pensent à vous.</p>
+          <p class="text-muted"><small>Exemple : Un ami vous recommande sans que vous le demandiez.</small></p>
+        </div>
+        
+        <div class="luck-card">
+          <div class="icon">
+            <i class="bi bi-lightning-charge"></i>
+          </div>
+          <h5>Chance Créée (Active)</h5>
+          <p>Vous osez. Vous prenez des risques, vous vous exposez, vous faites le premier pas.</p>
+          <p class="text-muted"><small>Exemple : Créer un compte YouTube → gagner des clients.</small></p>
+        </div>
+        
+        <div class="luck-card">
+          <div class="icon">
+            <i class="bi bi-stars"></i>
+          </div>
+          <h5>Chance Spirituelle (Baraka)</h5>
+          <p>Une grâce divine ou bénédiction invisible agit en votre faveur.</p>
+          <p class="text-muted"><small>Exemple : Prière nocturne → aide providentielle le lendemain.</small></p>
+        </div>
+      </div>
+      
+      <div class="text-center">
+        <button class="btn btn-luck" onclick="showDetails('types-chance')">
+          <i class="bi bi-info-circle me-1"></i>Voir le tableau comparatif complet
+        </button>
+      </div>
+    </section>
+
+    <section id="pratiques" class="mb-5">
+      <h2 class="text-center mb-4">20 Pratiques pour Attirer la Chance</h2>
+      
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-header d-flex align-items-center">
+              <i class="bi bi-journal-text me-2"></i>
+              <h5 class="mb-0">Pratiques de développement personnel</h5>
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex align-items-center">
+                  <i class="bi bi-book me-2 text-primary"></i>
+                  <span>Lire tous les jours</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                  <i class="bi bi-heart-pulse me-2 text-primary"></i>
+                  <span>Faire du silence et méditer</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                  <i class="bi bi-pencil-square me-2 text-primary"></i>
+                  <span>Tenir un agenda de 90 jours</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                  <i class="bi bi-check2-circle me-2 text-primary"></i>
+                  <span>Faire une action quotidienne vers ses objectifs</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                  <i class="bi bi-lightbulb me-2 text-primary"></i>
+                  <span>Tester des idées régulièrement</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                  <i class="bi bi-hand-thumbs-up me-2 text-primary"></i>
+                  <span>Exprimer de la gratitude chaque soir</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                  <i class="bi bi-bullseye me-2 text-primary"></i>
+                  <span>Écrire ses objectifs chaque semaine</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                  <i class="bi bi-graph-up me-2 text-primary"></i>
+                  <span>Faire un bilan chaque fin de mois</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-header d-flex align-items-center">
+              <i class="bi bi-people me-2"></i>
+              <h5 class="mb-0">Pratiques relationnelles et professionnelles</h5>
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex align-items-center">
+                  <i class="bi bi-person-lines-fill me-2 text-primary"></i>
+                  <span>Entretenir son réseau</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                  <i class="bi bi-chat-dots me-2 text-primary"></i>
+                  <span>Contacter 1 nouvelle personne / semaine</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                  <i class="bi bi-gift me-2 text-primary"></i>
+                  <span>Donner avant de recevoir</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                  <i class="bi bi-linkedin me-2 text-primary"></i>
+                  <span>Utiliser LinkedIn, GitHub, Behance…</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                  <i class="bi bi-mortarboard me-2 text-primary"></i>
+                  <span>Apprendre une nouvelle compétence / mois</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                  <i class="bi bi-binoculars me-2 text-primary"></i>
+                  <span>Observer les tendances (veille stratégique)</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                  <i class="bi bi-heart me-2 text-primary"></i>
+                  <span>Donner du temps bénévolement</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                  <i class="bi bi-ear me-2 text-primary"></i>
+                  <span>Être à l'écoute des autres (vraiment)</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                  <i class="bi bi-rocket-takeoff me-2 text-primary"></i>
+                  <span>Lancer un mini-projet ou test par trimestre</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="row mt-4">
+        <div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-header d-flex align-items-center">
+              <i class="bi bi-stars me-2"></i>
+              <h5 class="mb-0">Pratiques spirituelles</h5>
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex align-items-center">
+                  <i class="bi bi-sun me-2 text-primary"></i>
+                  <span>Faire des prières régulières (Fajr, etc.)</span>
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                  <i class="bi bi-bookmark-heart me-2 text-primary"></i>
+                  <span>Lire ou réciter des invocations (Douas)</span>
+                </li>
+              </ul>
+              <div class="luck-highlight highlight-box mt-3">
+                <p><strong>La Baraka :</strong> Une grâce divine ou bénédiction invisible qui agit en votre faveur, souvent après des efforts sincères.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-header d-flex align-items-center">
+              <i class="bi bi-briefcase me-2"></i>
+              <h5 class="mb-0">Préparation professionnelle</h5>
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex align-items-center">
+                  <i class="bi bi-file-earmark-person me-2 text-primary"></i>
+                  <span>Tenir à jour son CV / Portfolio</span>
+                </li>
+              </ul>
+              <div class="highlight-box mt-3">
+                <p><strong>Être toujours prêt :</strong> La préparation vous permet de saisir les opportunités quand elles se présentent, même de façon inattendue.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="audace" class="mb-5">
+      <h2 class="text-center mb-4">La Chance Sourit aux Audacieux</h2>
+      
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-header d-flex align-items-center">
+              <i class="bi bi-lightning-charge me-2"></i>
+              <h5 class="mb-0">Les 5 enseignements de Philippe Gabilliet</h5>
+            </div>
+            <div class="card-body">
+              <div class="process-step">
+                <h5>1. La chance n'est pas un hasard pur</h5>
+                <p>Elle naît <strong>de la rencontre entre des opportunités</strong> (souvent imprévues) et une <strong>préparation personnelle</strong>.</p>
+              </div>
+              
+              <div class="process-step">
+                <h5>2. L'audace attire les opportunités</h5>
+                <p>Les personnes audacieuses <strong>sortent de leur zone de confort</strong>, ce qui les met en mouvement et augmente les probabilités de croiser des opportunités.</p>
+              </div>
+              
+              <div class="process-step">
+                <h5>3. L'audace développe un état d'esprit propice</h5>
+                <p>Elle repose sur une vision <strong>positive et proactive</strong> de la vie, une <strong>tolérance à l'échec</strong>, une <strong>curiosité active</strong> et une capacité à <strong>rebondir</strong>.</p>
+              </div>
+              
+              <div class="process-step">
+                <h5>4. Les audacieux provoquent la chance</h5>
+                <p>Ils <strong>créent leurs chances</strong> : ils parlent de leurs projets, ils cherchent, ils osent demander.</p>
+              </div>
+              
+              <div class="process-step">
+                <h5>5. Chance et audace sont liées à une posture mentale</h5>
+                <p>Être audacieux, c'est avoir <strong>une posture intérieure d'ouverture, d'initiative et de persévérance</strong>.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-6">
+          <div class="card h-100">
+            <div class="card-header d-flex align-items-center">
+              <i class="bi bi-table me-2"></i>
+              <h5 class="mb-0">Attitude des audacieux vs Effet sur la chance</h5>
+            </div>
+            <div class="card-body">
+              <table class="table table-sm">
+                <thead>
+                  <tr>
+                    <th>Élément</th>
+                    <th>Attitude des audacieux</th>
+                    <th>Effet sur la chance</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Prise d'initiative</td>
+                    <td>Ils osent sans garantie</td>
+                    <td>Multiplient les occasions</td>
+                  </tr>
+                  <tr>
+                    <td>Résilience</td>
+                    <td>Ils acceptent l'échec</td>
+                    <td>Apprennent et rebondissent</td>
+                  </tr>
+                  <tr>
+                    <td>Réseau</td>
+                    <td>Ils vont vers les autres</td>
+                    <td>Reçoivent informations et opportunités</td>
+                  </tr>
+                  <tr>
+                    <td>Curiosité</td>
+                    <td>Ils explorent l'inconnu</td>
+                    <td>Découvrent l'imprévu</td>
+                  </tr>
+                  <tr>
+                    <td>Optimisme</td>
+                    <td>Ils croient en une issue positive</td>
+                    <td>Restent motivés et persistants</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center">
+        <button class="btn btn-luck" onclick="showDetails('audace')">
+          <i class="bi bi-book me-1"></i>En savoir plus sur le livre de Philippe Gabilliet
+        </button>
+      </div>
+    </section>
+
+    <section id="simulations" class="mb-5">
+      <h2 class="text-center mb-4">Simulations interactives</h2>
+
+      <ul class="nav nav-tabs justify-content-center mb-4" id="simulationTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="audacity-test-tab" data-bs-toggle="tab" data-bs-target="#audacity-test" type="button" role="tab">Test d'Audace</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="luck-meter-tab" data-bs-toggle="tab" data-bs-target="#luck-meter" type="button" role="tab">Indice de Chance</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="opportunity-sim-tab" data-bs-toggle="tab" data-bs-target="#opportunity-sim" type="button" role="tab">Simulateur d'Opportunités</button>
+        </li>
+      </ul>
+
+      <div class="tab-content" id="simulationTabContent">
+        <div class="tab-pane fade show active" id="audacity-test" role="tabpanel">
+          <div class="simulation-container">
+            <h3 class="mb-4"><i class="bi bi-lightning-charge me-2"></i>Testez votre niveau d'audace</h3>
+            <p>Ce test vous aide à évaluer votre propension à l'audace, facteur clé pour provoquer la chance selon Philippe Gabilliet.</p>
+            
+            <div id="audacityQuestions">
+              <div class="mb-4">
+                <h5>1. Face à une nouvelle opportunité, votre réaction est généralement :</h5>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="q1" id="q1a" value="1">
+                  <label class="form-check-label" for="q1a">J'attends d'être sûr à 100% avant d'agir</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="q1" id="q1b" value="2">
+                  <label class="form-check-label" for="q1b">Je me renseigne puis je me lance</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="q1" id="q1c" value="3">
+                  <label class="form-check-label" for="q1c">Je me lance directement, je verrai bien</label>
+                </div>
+              </div>
+              
+              <div class="mb-4">
+                <h5>2. Quand vous rencontrez un échec :</h5>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="q2" id="q2a" value="1">
+                  <label class="form-check-label" for="q2a">J'abandonne généralement</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="q2" id="q2b" value="2">
+                  <label class="form-check-label" for="q2b">J'analyse ce qui n'a pas marché et j'essaie à nouveau</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="q2" id="q2c" value="3">
+                  <label class="form-check-label" for="q2c">Je considère que c'est une étape normale vers le succès</label>
+                </div>
+              </div>
+              
+              <div class="mb-4">
+                <h5>3. Votre approche des nouvelles rencontres :</h5>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="q3" id="q3a" value="1">
+                  <label class="form-check-label" for="q3a">J'attends qu'on vienne vers moi</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="q3" id="q3b" value="2">
+                  <label class="form-check-label" for="q3b">Je fais des efforts pour rencontrer de nouvelles personnes</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="q3" id="q3c" value="3">
+                  <label class="form-check-label" for="q3c">Je vais spontanément vers les autres</label>
+                </div>
+              </div>
+              
+              <div class="mb-4">
+                <h5>4. Face à un projet complexe :</h5>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="q4" id="q4a" value="1">
+                  <label class="form-check-label" for="q4a">Je reporte souvent à plus tard</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="q4" id="q4b" value="2">
+                  <label class="form-check-label" for="q4b">Je le découpe en petites étapes et j'avance progressivement</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="q4" id="q4c" value="3">
+                  <label class="form-check-label" for="q4c">Je me lance directement et j'apprends en faisant</label>
+                </div>
+              </div>
+              
+              <div class="mb-4">
+                <h5>5. Votre rapport au risque :</h5>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="q5" id="q5a" value="1">
+                  <label class="form-check-label" for="q5a">Je préfère la sécurité et l'absence de risque</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="q5" id="q5b" value="2">
+                  <label class="form-check-label" for="q5b">Je prends des risques calculés</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="q5" id="q5c" value="3">
+                  <label class="form-check-label" for="q5c">Je suis à l'aise avec l'incertitude et les risques modérés</label>
+                </div>
+              </div>
+            </div>
+            
+            <div class="text-center">
+              <button class="btn btn-primary" onclick="calculateAudacityScore()">Calculer mon score d'audace</button>
+            </div>
+            
+            <div id="audacityResult" class="mt-4" style="display: none;">
+              <div class="card">
+                <div class="card-header">
+                  <h5 class="mb-0">Votre niveau d'audace</h5>
+                </div>
+                <div class="card-body">
+                  <div class="luck-meter mb-3">
+                    <div id="audacityProgress" class="luck-progress" style="width: 0%"></div>
+                  </div>
+                  <p id="audacityMessage" class="mb-0"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="tab-pane fade" id="luck-meter" role="tabpanel">
+          <div class="simulation-container">
+            <h3 class="mb-4"><i class="bi bi-clover me-2"></i>Évaluez votre indice de chance</h3>
+            <p>Cet outil vous aide à estimer votre capacité à provoquer et attirer la chance dans votre vie.</p>
+            
+            <div class="mb-4">
+              <h5>À quelle fréquence sortez-vous de votre zone de confort ?</h5>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="comfort" id="comfort1" value="1">
+                <label class="form-check-label" for="comfort1">Rarement</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="comfort" id="comfort2" value="2">
+                <label class="form-check-label" for="comfort2">Occasionnellement</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="comfort" id="comfort3" value="3">
+                <label class="form-check-label" for="comfort3">Régulièrement</label>
+              </div>
+            </div>
+            
+            <div class="mb-4">
+              <h5>Combien de nouvelles personnes rencontrez-vous par mois ?</h5>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="network" id="network1" value="1">
+                <label class="form-check-label" for="network1">Moins de 1</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="network" id="network2" value="2">
+                <label class="form-check-label" for="network2">1 à 3</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="network" id="network3" value="3">
+                <label class="form-check-label" for="network3">Plus de 3</label>
+              </div>
+            </div>
+            
+            <div class="mb-4">
+              <h5>À quelle fréquence apprenez-vous de nouvelles compétences ?</h5>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="skills" id="skills1" value="1">
+                <label class="form-check-label" for="skills1">Rarement</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="skills" id="skills2" value="2">
+                <label class="form-check-label" for="skills2">Occasionnellement</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="skills" id="skills3" value="3">
+                <label class="form-check-label" for="skills3">Régulièrement</label>
+              </div>
+            </div>
+            
+            <div class="text-center">
+              <button class="btn btn-primary" onclick="calculateLuckIndex()">Calculer mon indice de chance</button>
+            </div>
+            
+            <div id="luckResult" class="mt-4" style="display: none;">
+              <div class="card">
+                <div class="card-header">
+                  <h5 class="mb-0">Votre indice de chance</h5>
+                </div>
+                <div class="card-body">
+                  <div class="luck-meter mb-3">
+                    <div id="luckProgress" class="luck-progress" style="width: 0%"></div>
+                  </div>
+                  <p id="luckMessage" class="mb-0"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="tab-pane fade" id="opportunity-sim" role="tabpanel">
+          <div class="simulation-container">
+            <h3 class="mb-4"><i class="bi bi-bullseye me-2"></i>Simulateur d'opportunités</h3>
+            <p>Cette simulation montre comment augmenter vos chances de rencontrer des opportunités intéressantes.</p>
+            
+            <div class="mb-4">
+              <h5>Combien d'actions proactives faites-vous par semaine ?</h5>
+              <div class="input-group mb-3" style="max-width: 300px;">
+                <input type="number" class="form-control" id="actionsCount" min="0" max="20" value="0">
+                <span class="input-group-text">actions/semaine</span>
+              </div>
+              <p class="text-muted">Actions proactives : contacter quelqu'un, postuler à une offre, lancer un projet, etc.</p>
+            </div>
+            
+            <div class="mb-4">
+              <h5>Combien de personnes connaissez-vous dans votre domaine ?</h5>
+              <div class="input-group mb-3" style="max-width: 300px;">
+                <input type="number" class="form-control" id="networkSize" min="0" max="500" value="10">
+                <span class="input-group-text">personnes</span>
+              </div>
+            </div>
+            
+            <div class="text-center">
+              <button class="btn btn-primary" onclick="simulateOpportunities()">Simuler mes opportunités</button>
+            </div>
+            
+            <div id="opportunityResult" class="mt-4" style="display: none;">
+              <div class="card">
+                <div class="card-header">
+                  <h5 class="mb-0">Résultats de la simulation</h5>
+                </div>
+                <div class="card-body">
+                  <p id="opportunityMessage" class="mb-3"></p>
+                  <div class="luck-meter mb-3">
+                    <div id="opportunityProgress" class="luck-progress" style="width: 0%"></div>
+                  </div>
+                  <p id="opportunityDetails" class="mb-0"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="outils" class="mb-5">
+      <h2 class="text-center mb-4">Outils pratiques</h2>
+      
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <div class="card h-100">
+            <div class="card-header d-flex align-items-center">
+              <i class="bi bi-calendar-check me-2"></i>
+              <h5 class="mb-0">Agenda 90 jours</h5>
+            </div>
+            <div class="card-body">
+              <p>Planifiez vos objectifs et actions pour les 90 prochains jours.</p>
+              <div class="highlight-box">
+                <p><strong>Objectif :</strong> Transformer vos objectifs annuels en actions concrètes.</p>
+              </div>
+              <button class="btn btn-outline-primary mt-2">Télécharger le modèle</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+          <div class="card h-100">
+            <div class="card-header d-flex align-items-center">
+              <i class="bi bi-journal-text me-2"></i>
+              <h5 class="mb-0">Journal de gratitude</h5>
+            </div>
+            <div class="card-body">
+              <p>Notez chaque jour 3 choses pour lesquelles vous êtes reconnaissant.</p>
+              <div class="luck-highlight highlight-box">
+                <p><strong>Effet :</strong> Cultive un état d'esprit positif qui attire les opportunités.</p>
+              </div>
+              <button class="btn btn-outline-primary mt-2">Télécharger le modèle</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+          <div class="card h-100">
+            <div class="card-header d-flex align-items-center">
+              <i class="bi bi-diagram-3 me-2"></i>
+              <h5 class="mb-0">Carte de réseau</h5>
+            </div>
+            <div class="card-body">
+              <p>Visualisez et organisez votre réseau professionnel.</p>
+              <div class="highlight-box">
+                <p><strong>Objectif :</strong> Identifier les personnes clés et les opportunités de connexion.</p>
+              </div>
+              <button class="btn btn-outline-primary mt-2">Télécharger le modèle</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h5>La Chance comme Compétence</h5>
+          <p>Apprenez à provoquer, développer et amplifier la chance dans tous les domaines de votre vie.</p>
+        </div>
+        <div class="col-md-3">
+          <h5>Liens rapides</h5>
+          <ul class="list-unstyled">
+            <li><a href="#introduction" class="text-light">Introduction</a></li>
+            <li><a href="#types-chance" class="text-light">Types de Chance</a></li>
+            <li><a href="#pratiques" class="text-light">Pratiques</a></li>
+            <li><a href="#audace" class="text-light">L'Audace</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h5>Ressources</h5>
+          <ul class="list-unstyled">
+            <li><a href="#simulations" class="text-light">Simulations</a></li>
+            <li><a href="#outils" class="text-light">Outils</a></li>
+            <li><a href="#" class="text-light">Bibliographie</a></li>
+            <li><a href="#" class="text-light">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr class="my-4">
+      <div class="text-center">
+        <p>&copy; 2023 La Chance comme Compétence. Tous droits réservés.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Fonction pour afficher les détails d'une section
+    function showDetails(sectionId) {
+      alert("Cette fonctionnalité afficherait les détails complets de la section " + sectionId + " dans une modal ou une nouvelle page.");
+    }
+
+    // Calcul du score d'audace
+    function calculateAudacityScore() {
+      const questions = document.querySelectorAll('#audacityQuestions input[type="radio"]:checked');
+      if (questions.length < 5) {
+        alert("Veuillez répondre à toutes les questions avant de calculer votre score.");
+        return;
+      }
+
+      let totalScore = 0;
+      questions.forEach(q => {
+        totalScore += parseInt(q.value);
+      });
+
+      const maxScore = 15; // 5 questions * 3 points max
+      const percentage = (totalScore / maxScore) * 100;
+
+      // Afficher le résultat
+      document.getElementById('audacityResult').style.display = 'block';
+      document.getElementById('audacityProgress').style.width = percentage + '%';
+
+      let message = '';
+      if (percentage < 40) {
+        message = "Votre niveau d'audace est plutôt faible. Vous préférez la sécurité et l'absence de risque. Pour augmenter vos chances, essayez de sortir un peu plus de votre zone de confort, même avec de petites actions.";
+      } else if (percentage < 70) {
+        message = "Votre niveau d'audace est modéré. Vous prenez des risques calculés et sortez occasionnellement de votre zone de confort. Continuez à développer cette habitude pour augmenter vos opportunités.";
+      } else {
+        message = "Votre niveau d'audace est élevé ! Vous êtes à l'aise avec l'incertitude et prenez régulièrement des initiatives. Cette attitude vous expose à davantage d'opportunités et augmente vos chances de succès.";
+      }
+
+      document.getElementById('audacityMessage').textContent = message;
+    }
+
+    // Calcul de l'indice de chance
+    function calculateLuckIndex() {
+      const comfort = document.querySelector('input[name="comfort"]:checked');
+      const network = document.querySelector('input[name="network"]:checked');
+      const skills = document.querySelector('input[name="skills"]:checked');
+
+      if (!comfort || !network || !skills) {
+        alert("Veuillez répondre à toutes les questions avant de calculer votre indice.");
+        return;
+      }
+
+      let totalScore = parseInt(comfort.value) + parseInt(network.value) + parseInt(skills.value);
+      const maxScore = 9; // 3 questions * 3 points max
+      const percentage = (totalScore / maxScore) * 100;
+
+      // Afficher le résultat
+      document.getElementById('luckResult').style.display = 'block';
+      document.getElementById('luckProgress').style.width = percentage + '%';
+
+      let message = '';
+      if (percentage < 40) {
+        message = "Votre indice de chance est plutôt faible. Vous pourriez augmenter vos opportunités en sortant davantage de votre zone de confort, en élargissant votre réseau et en apprenant de nouvelles compétences.";
+      } else if (percentage < 70) {
+        message = "Votre indice de chance est modéré. Vous avez de bonnes habitudes mais pourriez les renforcer pour augmenter encore vos opportunités.";
+      } else {
+        message = "Votre indice de chance est élevé ! Vos habitudes d'ouverture, d'apprentissage et de réseau vous exposent régulièrement à de nouvelles opportunités. Continuez sur cette voie !";
+      }
+
+      document.getElementById('luckMessage').textContent = message;
+    }
+
+    // Simulation d'opportunités
+    function simulateOpportunities() {
+      const actionsCount = parseInt(document.getElementById('actionsCount').value);
+      const networkSize = parseInt(document.getElementById('networkSize').value);
+
+      if (isNaN(actionsCount) || isNaN(networkSize)) {
+        alert("Veuillez entrer des valeurs valides.");
+        return;
+      }
+
+      // Calcul simplifié des opportunités
+      // Plus d'actions et un réseau plus large augmentent les chances
+      const baseOpportunities = 1;
+      const actionFactor = actionsCount * 0.2;
+      const networkFactor = Math.min(networkSize * 0.01, 5); // Maximum 5 points pour le réseau
+      
+      const opportunityScore = baseOpportunities + actionFactor + networkFactor;
+      const maxScore = 10;
+      const percentage = Math.min((opportunityScore / maxScore) * 100, 100);
+
+      // Afficher le résultat
+      document.getElementById('opportunityResult').style.display = 'block';
+      document.getElementById('opportunityProgress').style.width = percentage + '%';
+
+      let message = '';
+      if (percentage < 30) {
+        message = "Vos chances de rencontrer des opportunités sont faibles. Augmentez vos actions proactives et élargissez votre réseau pour améliorer cette situation.";
+      } else if (percentage < 60) {
+        message = "Vos chances de rencontrer des opportunités sont modérées. Continuez à développer vos actions et votre réseau pour augmenter vos opportunités.";
+      } else {
+        message = "Vos chances de rencontrer des opportunités sont élevées ! Votre niveau d'actions et la taille de votre réseau vous exposent régulièrement à de nouvelles possibilités.";
+      }
+
+      document.getElementById('opportunityMessage').textContent = message;
+      
+      const details = `Avec ${actionsCount} actions proactives par semaine et un réseau de ${networkSize} personnes, vous augmentez significativement vos chances de rencontrer des opportunités intéressantes.`;
+      document.getElementById('opportunityDetails').textContent = details;
+    }
+
+    // Animation au défilement
+    document.addEventListener('DOMContentLoaded', function() {
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = 1;
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, observerOptions);
+
+      // Observer les cartes de modules
+      document.querySelectorAll('.module-card').forEach(card => {
+        observer.observe(card);
+      });
+    });
+  </script>
+</body>
+</html>
