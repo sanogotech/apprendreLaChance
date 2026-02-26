@@ -318,4 +318,285 @@ C’est mécanique.
 
 ---
 
+---
+
+# 📊 1️⃣ MODÈLE ULTRA DÉTAILLÉ SUR 20 ANS
+
+## Hypothèse de base (profil discipliné)
+
+* Revenu initial : 1 000 000 FCFA / mois
+* Croissance annuelle du revenu : 5 %
+* Investissement : 20 %
+* Rendement moyen annuel : 8 %
+* Réinvestissement automatique
+* Zéro interruption
+
+---
+
+## Projection simplifiée
+
+### Année 1
+
+Investissement annuel :
+200 000 × 12 = 2 400 000 FCFA
+
+Capital fin année ≈ 2 592 000 (avec rendement)
+
+---
+
+### Année 5
+
+Capital ≈ 15 à 18 millions FCFA
+
+Effet visible.
+
+---
+
+### Année 10
+
+Capital ≈ 40 à 50 millions FCFA
+
+Les intérêts commencent à produire plus que l’effort initial.
+
+---
+
+### Année 15
+
+Capital ≈ 90 à 110 millions FCFA
+
+---
+
+### Année 20
+
+Capital ≈ 180 à 250 millions FCFA
+
+À ce niveau :
+
+* Rendement annuel 8 % ≈ 16–20 millions / an
+* Soit ≈ 1,3 à 1,6 million / mois sans travailler
+
+👉 Le capital travaille plus que vous.
+
+---
+
+## Ce que montrent les statistiques mondiales
+
+Les études sur les intérêts composés montrent que :
+
+* Les 10 premières années sont lentes
+* Les 10 suivantes créent l’explosion
+* 70 % de la richesse finale vient des 5 dernières années
+
+La majorité abandonne avant la phase exponentielle.
+
+---
+
+# 🏗 2️⃣ PLAN SPÉCIAL ENTREPRENEUR MULTI-BUSINESS
+
+Problème typique :
+
+* Trop de projets
+* Cashflow instable
+* Mélange personnel / business
+* Pas de capitalisation
+
+---
+
+## Structure recommandée
+
+### Étape 1 : Centralisation
+
+Créer :
+
+* 1 holding personnelle
+* Comptes séparés pour chaque business
+* Salaire fixe mensuel versé au dirigeant
+
+Vous devez devenir salarié de vos propres entreprises.
+
+---
+
+### Étape 2 : Règle entrepreneur adaptée
+
+Au lieu de 20/10/60/10 :
+
+* 30 % Croissance (réinvestissement stratégique)
+* 10 % Stabilité
+* 50 % Essentiels
+* 10 % Plaisir
+
+---
+
+### Étape 3 : REX terrain
+
+Entrepreneurs qui échouent :
+
+* Réinjectent tout dans le business
+* Aucun actif personnel
+* Aucune réserve
+* Dépendance totale à l’activité
+
+Entrepreneurs solides :
+
+* Extraient un salaire
+* Investissent personnellement en immobilier / ETF
+* Séparent richesse et activité
+
+---
+
+## Checklist entrepreneur
+
+* [ ] Salaire fixe mensuel ?
+* [ ] Séparation comptes ?
+* [ ] Minimum 6 mois charges perso ?
+* [ ] Minimum 6 mois charges business ?
+* [ ] Pas plus de 3 projets majeurs simultanés ?
+
+---
+
+# 📈 3️⃣ MODÈLE HAUT REVENU (5M / mois)
+
+Revenu : 5 000 000 FCFA / mois
+Investissement : 30 %
+Soit 1 500 000 / mois
+
+---
+
+## Projection 15 ans à 8 %
+
+Investissement annuel : 18 000 000
+
+Après 15 ans :
+Capital ≈ 450 à 600 millions FCFA
+
+Rendement annuel 8 % :
+36 à 48 millions / an
+3 à 4 millions / mois passifs
+
+---
+
+## Problème typique haut revenu
+
+Inflation lifestyle.
+
+* Villa trop tôt
+* Véhicule trop cher
+* Charges fixes énormes
+
+Résultat : pression permanente malgré revenu élevé.
+
+---
+
+## Discipline recommandée
+
+Même à 5M/mois :
+
+* Logement ≤ 25 %
+* Véhicule ≤ 10 %
+* Épargne minimale 30 %
+* Actifs productifs prioritaires
+
+---
+
+# 🔁 4️⃣ PLAN “SORTIE DE CLASSE MOYENNE EN 7 ANS”
+
+Définition classe moyenne fragile :
+
+* Dépendance au salaire
+* Peu d’actifs
+* Pression mensuelle
+* Peu de marge
+
+---
+
+## Objectif 7 ans :
+
+Créer :
+
+* 2 à 3 actifs majeurs
+* 12 mois de fonds d’urgence
+* Revenus passifs couvrant 50 % des dépenses
+
+---
+
+## Plan stratégique
+
+### Année 1–2
+
+* Discipline 20 %
+* Fonds d’urgence complet
+* Premier actif
+
+---
+
+### Année 3–4
+
+* Deuxième actif
+* Diversification
+* Augmenter taux d’épargne à 25 %
+
+---
+
+### Année 5–6
+
+* Troisième actif
+* Optimisation fiscale
+* Réduction dépendance salariale
+
+---
+
+### Année 7
+
+Objectif :
+
+Si dépenses = 800 000 / mois
+Créer 400 000 / mois passifs minimum.
+
+À ce stade :
+
+Vous n’êtes plus fragile.
+
+---
+
+# REX réaliste
+
+Ceux qui sortent réellement de la classe moyenne :
+
+1. Augmentent revenu
+2. Contrôlent dépenses
+3. Investissent tôt
+4. Évitent dispersion
+5. Restent constants 7 ans
+
+Ceux qui stagnent :
+
+* Changent de stratégie chaque année
+* Multiplient projets
+* Consomment les profits
+
+---
+
+# Synthèse comparative
+
+| Profil                 | Discipline | 10 ans  | 20 ans |
+| ---------------------- | ---------- | ------- | ------ |
+| Salarié 1M/mois        | 20 %       | 40–50M  | 200M   |
+| Entrepreneur structuré | 30 %       | 80–120M | 300M+  |
+| Haut revenu 5M         | 30 %       | 200M+   | 600M+  |
+
+---
+
+# Vérité finale
+
+La richesse est une fonction :
+
+Discipline × Temps × Structure
+
+Le revenu accélère.
+Le système garantit.
+
+---
+
+
+
 
