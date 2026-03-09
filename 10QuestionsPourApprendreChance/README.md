@@ -11,79 +11,308 @@ les gens diront : **“Quelle chance !”**
 
 ---
 
-# ❓ 10 questions à se poser
+# ❓ 40 questions à se poser
 
 Avant de parler de chance, il est important de se poser une question simple :  
 **Sommes-nous réellement prêts lorsque l’opportunité apparaît ?**
 
 Beaucoup de personnes espèrent la chance, mais peu se préparent réellement à la recevoir. Pourtant, lorsqu’une opportunité arrive, elle demande souvent **des compétences, du courage, des ressources et de la clarté**.
 
-Ces 10 questions permettent de faire **un auto-diagnostic rapide** pour savoir si vous êtes prêt à transformer une opportunité en réussite.
+Ces 40 questions permettent de faire **un auto-diagnostic complet** pour savoir si vous êtes prêt à transformer une opportunité en réussite.
 
 ---
+
+# 🧠 Préparation personnelle et compétences
 
 ## 1️⃣ Si une opportunité arrive demain, suis-je prêt ?
 Ai-je les compétences pour la saisir ?
 
-Beaucoup d’opportunités passent devant nous, mais sans compétences, on ne peut pas les exploiter. La préparation quotidienne (formation, expérience, pratique) augmente les chances de transformer une opportunité en succès.
+La chance favorise les personnes qui ont développé des compétences utiles avant que l'opportunité n'apparaisse.  
+Par exemple, quelqu’un qui apprend la programmation pendant des années sera prêt lorsqu’un projet technologique se présente.
+
+**Tip :** apprendre une compétence stratégique chaque année.
 
 ---
 
-## 2️⃣ Ai-je les moyens d’agir ?
-Un peu d’épargne, des ressources ou des partenaires.
+## 2️⃣ Est-ce que je continue d’apprendre chaque jour ?
 
-Certaines opportunités demandent une réaction rapide : investir, lancer un projet, voyager, acheter un équipement. Avoir un minimum de ressources ou un réseau de partenaires permet de saisir ces occasions.
+Le monde évolue rapidement. Ceux qui apprennent constamment restent compétitifs et prêts pour de nouvelles opportunités.
 
----
-
-## 3️⃣ Si je rencontre la bonne personne, suis-je prêt à expliquer mon projet en 1 minute ?
-
-Les rencontres changent souvent une vie : un investisseur, un mentor, un futur client. Mais si vous ne savez pas expliquer clairement votre vision ou votre projet, l’opportunité peut disparaître.
+**Exemple :** lire 20 minutes par jour peut transformer votre vision en quelques années.
 
 ---
 
-## 4️⃣ Si une porte s’ouvre, aurai-je le courage d’agir rapidement ?
+## 3️⃣ Est-ce que je lis, me forme ou développe mes connaissances régulièrement ?
 
-Beaucoup de personnes voient les opportunités mais hésitent trop longtemps. La peur, le doute ou l’habitude de rester dans sa zone de confort empêchent parfois de saisir une chance unique.
+La lecture et la formation élargissent la perspective et permettent de repérer des opportunités que les autres ne voient pas.
 
----
-
-## 5️⃣ Est-ce que je crée moi-même mes opportunités ?
-Rencontres, apprentissage, actions.
-
-Les personnes dites “chanceuses” rencontrent plus de monde, testent plus d’idées et se mettent dans des environnements où les opportunités circulent.
+**Tip :** lire au moins un livre utile par mois.
 
 ---
 
-## 6️⃣ Est-ce que je continue d’apprendre chaque jour ?
-Nouvelles compétences, nouvelles idées.
+## 4️⃣ Est-ce que je travaille sur des projets concrets qui développent mon expérience ?
 
-Le monde change rapidement. Ceux qui apprennent constamment augmentent leur valeur et deviennent plus capables de saisir des opportunités quand elles apparaissent.
+La théorie est utile, mais la pratique crée la vraie compétence.
 
----
-
-## 7️⃣ Ai-je un réseau de personnes qui peuvent m’ouvrir des portes ?
-
-Beaucoup d’opportunités viennent des relations humaines : collègues, amis, mentors, partenaires. Un bon réseau peut informer, recommander et créer des opportunités inattendues.
+**Exemple :** créer un petit projet personnel permet souvent d’apprendre plus que plusieurs cours.
 
 ---
 
-## 8️⃣ Est-ce que je travaille sur des projets visibles ?
-Car la chance trouve souvent ceux qui agissent.
+## 5️⃣ Est-ce que je prends le temps d’améliorer mes compétences clés ?
 
-Lorsque vous créez, partagez, entreprenez ou contribuez à des projets, les gens vous remarquent et les opportunités viennent plus facilement.
+Les personnes qui réussissent identifient leurs compétences principales et les renforcent constamment.
 
----
-
-## 9️⃣ Est-ce que je prends des initiatives ou j’attends que les choses arrivent ?
-
-Les personnes proactives provoquent souvent la chance : elles proposent des idées, lancent des projets et prennent des décisions.
+**Tip :** choisir 3 compétences majeures à développer sur 5 ans.
 
 ---
 
-## 🔟 Si une grande opportunité arrive, ai-je la discipline pour la transformer en succès ?
+## 6️⃣ Est-ce que je développe ma discipline personnelle ?
 
-Obtenir une opportunité est une chose. La transformer en réussite demande du travail, de la persévérance et de la discipline sur le long terme.
+La discipline permet de continuer à travailler même lorsque la motivation diminue.
+
+**Exemple :** se lever à la même heure chaque jour crée une structure de réussite.
+
+---
+
+## 7️⃣ Est-ce que je suis capable de travailler même quand la motivation diminue ?
+
+La motivation est temporaire, mais la discipline construit les résultats.
+
+**Tip :** créer des routines de travail simples et répétables.
+
+---
+
+## 8️⃣ Est-ce que je sais transformer mes erreurs en apprentissages ?
+
+Chaque échec contient une leçon importante.
+
+**Exemple :** les entrepreneurs qui réussissent ont souvent échoué plusieurs fois avant.
+
+---
+
+## 9️⃣ Est-ce que je développe ma réputation et ma crédibilité ?
+
+La confiance des autres attire les opportunités.
+
+**Tip :** toujours tenir ses engagements.
+
+---
+
+## 🔟 Est-ce que je suis capable d’expliquer clairement mes idées et mes projets ?
+
+Les idées puissantes doivent être expliquées simplement.
+
+**Exemple :** savoir présenter son projet en 1 minute peut ouvrir des portes.
+
+---
+
+# 🚀 Opportunités et action
+
+## 1️⃣1️⃣ Si une opportunité arrive, ai-je les moyens d’agir ?
+
+Certaines opportunités exigent une réaction rapide.
+
+**Tip :** garder un fonds d’opportunité ou des partenaires.
+
+---
+
+## 1️⃣2️⃣ Est-ce que je prends des initiatives ou j’attends que les choses arrivent ?
+
+Les personnes proactives rencontrent plus de chance.
+
+**Exemple :** proposer une idée ou un projet au lieu d’attendre une instruction.
+
+---
+
+## 1️⃣3️⃣ Est-ce que je sais reconnaître une opportunité quand elle apparaît ?
+
+Parfois les opportunités ressemblent à des problèmes.
+
+**Exemple :** un besoin du marché peut devenir une entreprise.
+
+---
+
+## 1️⃣4️⃣ Est-ce que je sais agir rapidement lorsqu’une porte s’ouvre ?
+
+Les opportunités disparaissent parfois vite.
+
+**Tip :** apprendre à prendre des décisions rapides mais réfléchies.
+
+---
+
+## 1️⃣5️⃣ Est-ce que je prends parfois des risques calculés ?
+
+La réussite implique souvent un certain niveau de risque.
+
+**Exemple :** lancer un projet ou investir dans une idée.
+
+---
+
+## 1️⃣6️⃣ Est-ce que je consacre du temps à des projets à long terme ?
+
+Les grandes réussites prennent souvent plusieurs années.
+
+**Tip :** travailler sur une vision à 5 ou 10 ans.
+
+---
+
+## 1️⃣7️⃣ Est-ce que je transforme les problèmes en opportunités ?
+
+Chaque problème cache une solution qui peut créer de la valeur.
+
+**Exemple :** une difficulté logistique peut devenir un service.
+
+---
+
+## 1️⃣8️⃣ Est-ce que je teste régulièrement de nouvelles idées ?
+
+Tester permet d’apprendre rapidement.
+
+**Tip :** lancer des petits projets pilotes.
+
+---
+
+## 1️⃣9️⃣ Est-ce que je suis prêt à sortir de ma zone de confort ?
+
+La croissance se trouve souvent en dehors du confort.
+
+**Exemple :** parler en public ou lancer un projet nouveau.
+
+---
+
+## 2️⃣0️⃣ Est-ce que je me prépare aujourd’hui à des opportunités que je ne vois pas encore ?
+
+Les personnes visionnaires travaillent souvent sur l’avenir.
+
+**Tip :** développer des compétences d’avenir.
+
+---
+
+# 🤝 Réseau et environnement
+
+## 2️⃣1️⃣ Ai-je un réseau de personnes qui peuvent m’ouvrir des portes ?
+
+Beaucoup d’opportunités viennent des relations humaines.
+
+**Tip :** entretenir les relations sincèrement.
+
+---
+
+## 2️⃣2️⃣ Est-ce que je rencontre régulièrement de nouvelles personnes ?
+
+Chaque rencontre peut apporter une idée ou une opportunité.
+
+---
+
+## 2️⃣3️⃣ Est-ce que je m’entoure de personnes positives et ambitieuses ?
+
+L’environnement influence la mentalité et les résultats.
+
+---
+
+## 2️⃣4️⃣ Est-ce que je partage mes idées et mes projets avec d’autres ?
+
+Les idées partagées attirent parfois des partenaires.
+
+---
+
+## 2️⃣5️⃣ Est-ce que je contribue à des projets visibles ?
+
+La visibilité attire les opportunités.
+
+---
+
+## 2️⃣6️⃣ Est-ce que je développe des relations de confiance ?
+
+La confiance est un capital social précieux.
+
+---
+
+## 2️⃣7️⃣ Est-ce que je suis prêt à aider les autres sans attendre immédiatement un retour ?
+
+Aider les autres crée souvent des opportunités indirectes.
+
+---
+
+# 🌙 Spiritualité et baraka
+
+## 2️⃣8️⃣ Est-ce que je demande à Allah la baraka dans mes projets ?
+
+La baraka multiplie les effets des efforts.
+
+---
+
+## 2️⃣9️⃣ Est-ce que je fais régulièrement du dzikr ?
+
+Le rappel d’Allah apporte paix intérieure et clarté.
+
+---
+
+## 3️⃣0️⃣ Est-ce que je pratique la sadaka ?
+
+La charité attire la bénédiction.
+
+---
+
+## 3️⃣1️⃣ Est-ce que je pratique parfois le jeûne volontaire ?
+
+Le jeûne développe la discipline spirituelle.
+
+---
+
+## 3️⃣2️⃣ Est-ce que je pratique la prière de nuit ?
+
+La prière de nuit renforce la connexion avec Allah.
+
+---
+
+## 3️⃣3️⃣ Est-ce que je cherche la baraka des parents ?
+
+Leur satisfaction est une source immense de bénédictions.
+
+---
+
+## 3️⃣4️⃣ Est-ce que je fais des invocations pour mes projets ?
+
+Les invocations accompagnent les efforts.
+
+---
+
+# 🛡️ Équilibre, protection et hygiène de vie
+
+## 3️⃣5️⃣ Est-ce que je pratique parfois la roqya ?
+
+Elle renforce la protection spirituelle.
+
+---
+
+## 3️⃣6️⃣ Est-ce que j’ai une routine du matin (Miracle Morning) ?
+
+Un bon début de journée améliore la productivité.
+
+---
+
+## 3️⃣7️⃣ Est-ce que je prends soin de ma santé ?
+
+La santé donne l’énergie nécessaire pour saisir les opportunités.
+
+---
+
+## 3️⃣8️⃣ Est-ce que je prends du temps pour réfléchir et planifier ma vie ?
+
+La réflexion permet de rester aligné avec ses objectifs.
+
+---
+
+## 3️⃣9️⃣ Est-ce que je développe un projet vert ou naturel ?
+
+Un potager ou un jardin peut apporter sérénité et équilibre.
+
+---
+
+## 4️⃣0️⃣ Est-ce que je pratique la gratitude ?
+
+Remercier pour ce que l’on a attire souvent plus de bien.
 
 ---
 
@@ -96,6 +325,8 @@ Elle récompense souvent ceux qui :
 - se préparent  
 - apprennent  
 - agissent  
+- cultivent un bon environnement  
+- recherchent la baraka  
 
 👉 La vraie question est :
 
