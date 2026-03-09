@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🍀 Chance & Compétence – 40 questions d’audit</title>
+  <!-- Bootstrap 5 + icônes -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --deep-green: #1e4a3b;
+      --medium-green: #2c7a4d;
+      --accent-gold: #f4c542;
+      --soft-cream: #f8f9f3;
+      --card-bg: #ffffff;
+      --shadow-sm: 0 10px 25px -8px rgba(0,40,20,0.15);
+      --shadow-hover: 0 25px 40px -12px #1e4a3b80;
+      --text-dark: #1e2b2f;
+    }
+
+    body {
+      background-color: var(--soft-cream);
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      color: var(--text-dark);
+      scroll-behavior: smooth;
+    }
+
+    /* navbar luxueuse */
+    .navbar-custom {
+      background: linear-gradient(145deg, #0f2e24, #1d5e41);
+      box-shadow: 0 8px 20px rgba(0,30,0,0.3);
+      padding: 0.9rem 0;
+    }
+    .navbar-custom .navbar-brand {
+      font-weight: 800;
+      font-size: 1.6rem;
+      color: white;
+      letter-spacing: -0.5px;
+    }
+    .navbar-custom .navbar-brand i {
+      color: var(--accent-gold);
+      margin-right: 10px;
+    }
+    .navbar-custom .nav-link {
+      color: rgba(255,255,255,0.85);
+      font-weight: 500;
+      margin: 0 5px;
+      border-radius: 30px;
+      padding: 0.5rem 1.2rem !important;
+      transition: all 0.2s;
+    }
+    .navbar-custom .nav-link:hover,
+    .navbar-custom .nav-link.active {
+      background: rgba(255,215,0,0.2);
+      color: white;
+    }
+
+    /* hero */
+    .hero-chance {
+      background: radial-gradient(circle at 70% 30%, #1d5e41, #10382b);
+      color: white;
+      padding: 4rem 0 5.5rem;
+      margin-bottom: 2.5rem;
+      border-radius: 0 0 50px 50px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 15px 25px rgba(0,0,0,0.2);
+    }
+    .hero-chance::before {
+      content: "🍀";
+      position: absolute;
+      bottom: -30px;
+      right: 10px;
+      font-size: 200px;
+      opacity: 0.12;
+      transform: rotate(20deg);
+      pointer-events: none;
+    }
+    .hero-chance h1 {
+      font-weight: 800;
+      font-size: 3.5rem;
+      text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+    .hero-chance .chance-badge {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(6px);
+      border-radius: 60px;
+      padding: 0.6rem 2rem;
+      display: inline-block;
+      border: 1px solid var(--accent-gold);
+      font-size: 1.2rem;
+    }
+
+    /* cartes questions */
+    .card-question {
+      background: var(--card-bg);
+      border: none;
+      border-radius: 28px;
+      box-shadow: var(--shadow-sm);
+      transition: 0.25s ease;
+      height: 100%;
+      border: 1px solid rgba(0,100,50,0.08);
+      backdrop-filter: blur(2px);
+    }
+    .card-question:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-hover);
+    }
+    .card-header-q {
+      background: transparent;
+      border-bottom: 2px dashed var(--medium-green);
+      padding: 1.2rem 1.2rem 0.5rem;
+      font-weight: 700;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .card-header-q i {
+      color: var(--accent-gold);
+      font-size: 1.8rem;
+    }
+    .question-tip {
+      color: #2f5b4a;
+      background: #e2f0e9;
+      border-radius: 18px;
+      padding: 0.6rem 1rem;
+      margin: 0.8rem 1.2rem 0.5rem;
+      font-size: 0.9rem;
+      border-left: 5px solid var(--accent-gold);
+    }
+    .question-tip i {
+      color: var(--medium-green);
+      margin-right: 8px;
+    }
+    .slider-block {
+      padding: 0.5rem 1.2rem 1.2rem;
+    }
+    .form-range {
+      height: 8px;
+      background: linear-gradient(90deg, #c8e6d9, var(--medium-green));
+      border-radius: 20px;
+    }
+    .form-range::-webkit-slider-thumb {
+      background: var(--accent-gold);
+      width: 24px;
+      height: 24px;
+      border: 3px solid white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      transition: 0.1s;
+    }
+    .form-range::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+      background: #f0b82e;
+    }
+    .badge-value {
+      background: var(--medium-green);
+      color: white;
+      border-radius: 40px;
+      padding: 0.3rem 1.2rem;
+      display: inline-block;
+      font-weight: 500;
+      margin-top: 10px;
+      font-size: 0.95rem;
+    }
+
+    /* onglets personnalisés */
+    .nav-tabs-custom {
+      border-bottom: 3px solid var(--medium-green);
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .nav-tabs-custom .nav-link {
+      background: white;
+      border: none;
+      border-radius: 50px;
+      padding: 0.7rem 1.8rem;
+      font-weight: 600;
+      color: var(--deep-green);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+      transition: 0.2s;
+      margin-right: 0.5rem;
+      border: 1px solid transparent;
+    }
+    .nav-tabs-custom .nav-link i {
+      margin-right: 6px;
+      color: var(--accent-gold);
+    }
+    .nav-tabs-custom .nav-link.active {
+      background: var(--deep-green);
+      color: white;
+      border-color: var(--accent-gold);
+      box-shadow: 0 8px 14px -6px #1e4a3b;
+    }
+
+    /* bouton score */
+    .btn-score-global {
+      background: linear-gradient(145deg, var(--deep-green), #135f3f);
+      border: none;
+      color: white;
+      font-weight: 700;
+      padding: 1rem 3.5rem;
+      border-radius: 60px;
+      box-shadow: 0 18px 28px -12px #0f3a28;
+      transition: 0.25s;
+      font-size: 1.5rem;
+      border: 1px solid var(--accent-gold);
+      margin-top: 2rem;
+    }
+    .btn-score-global:hover {
+      background: #0f462f;
+      transform: scale(1.02);
+      box-shadow: 0 22px 32px -8px #0b351f;
+    }
+
+    /* panneau résultat */
+    .score-panel {
+      background: white;
+      border-radius: 40px;
+      padding: 2.5rem;
+      box-shadow: var(--shadow-hover);
+      border-left: 12px solid var(--accent-gold);
+      margin: 2.5rem 0 2rem;
+    }
+    .score-number {
+      font-size: 5rem;
+      font-weight: 800;
+      color: var(--deep-green);
+      line-height: 1;
+    }
+
+    footer {
+      background: #0f2e24;
+      color: #ccc;
+      padding: 2.5rem 0;
+      border-radius: 40px 40px 0 0;
+      margin-top: 3.5rem;
+    }
+
+    .fade-question {
+      animation: gentleFade 0.5s ease forwards;
+      opacity: 0;
+    }
+    @keyframes gentleFade {
+      0% { opacity: 0; transform: translateY(12px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* small helpers */
+    .small-note {
+      font-size: 0.85rem;
+      color: #4d6a5f;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- navigation élégante -->
+  <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="#"><i class="bi bi-stars"></i> Audit 360° – Chance & Compétence</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarChance">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarChance">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="#hero">Accueil</a></li>
+          <li class="nav-item"><a class="nav-link" href="#audit">Audit 40 questions</a></li>
+          <li class="nav-item"><a class="nav-link" href="#result">Mon score</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- hero percutant -->
+  <section id="hero" class="hero-chance">
+    <div class="container text-center">
+      <span class="chance-badge mb-3"><i class="bi bi-dice-6-fill me-2"></i>Évaluation profonde</span>
+      <h1 class="display-3 fw-bold">🍀 La chance est‑elle<br>une compétence ?</h1>
+      <p class="col-lg-8 mx-auto lead fs-3 my-4">
+        <span class="fw-bold text-warning">Chance = Opportunité + Préparation + Action</span>
+      </p>
+      <p class="fs-5">Si une opportunité arrive et que vous êtes prêt…<br> les gens diront : <strong>“Quelle chance !”</strong></p>
+      <div class="mt-4 d-flex justify-content-center gap-3 flex-wrap">
+        <span class="bg-black bg-opacity-25 px-4 py-2 rounded-5"><i class="bi bi-patch-check-fill text-warning me-2"></i>40 questions contextuelles</span>
+        <span class="bg-black bg-opacity-25 px-4 py-2 rounded-5"><i class="bi bi-trophy-fill text-warning me-2"></i>Scoring global</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="container mb-5" id="audit">
+    <!-- les onglets seront générés par JS, on place un conteneur -->
+    <h2 class="text-center mb-4"><i class="bi bi-clipboard2-pulse me-2" style="color: var(--medium-green);"></i>Auto‑diagnostic complet : 40 questions</h2>
+    
+    <!-- navigation tabs (remplie par js) -->
+    <ul class="nav nav-tabs-custom justify-content-center" id="categoryTabs" role="tablist"></ul>
+
+    <!-- contenu des tabs (panels) -->
+    <div class="tab-content" id="categoryTabContent"></div>
+
+    <!-- bloc du score -->
+    <div class="text-center">
+      <button class="btn-score-global" id="calculateScoreBtn"><i class="bi bi-calculator-fill me-3"></i>Calculer mon score de chance</button>
+    </div>
+    <div id="scoreResult" style="display: none;" class="score-panel">
+      <div class="row align-items-center">
+        <div class="col-md-4 text-center">
+          <span class="score-number" id="scoreValue">0</span>
+          <span class="fs-3">/200</span>
+        </div>
+        <div class="col-md-8">
+          <div class="progress" style="height: 16px; border-radius: 40px;">
+            <div id="scoreProgress" class="progress-bar bg-success" role="progressbar" style="width: 0%;"></div>
+          </div>
+          <p class="mt-3 fs-5" id="scoreInterpretation">...</p>
+          <button class="btn btn-outline-secondary mt-2" id="resetAllBtn"><i class="bi bi-arrow-repeat me-2"></i>Recommencer l’audit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- footer -->
+  <footer class="text-center">
+    <div class="container">
+      <i class="bi bi-arrow-through-heart-fill fs-1 text-warning"></i>
+      <p class="mt-3">40 questions pour préparer votre chance – avec baraka et discipline</p>
+      <p class="small text-secondary">© 2025 – outil interactif, inspiré du manifeste agile & de la sagesse populaire</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    (function() {
+      // ----- Définition des 40 questions avec catégories, titres et astuces contextuelles (tips) -----
+      const questionsData = [
+        // 1️⃣ - 🔟 Préparation personnelle
+        { cat: "perso", num: "1️⃣", title: "Si une opportunité arrive demain, suis‑je prêt ?", tip: "Ai‑je les compétences pour la saisir ? La chance favorise ceux qui ont développé des compétences utiles avant que l'opportunité n'apparaisse. Tip : apprendre une compétence stratégique chaque année." },
+        { cat: "perso", num: "2️⃣", title: "Est‑ce que je continue d’apprendre chaque jour ?", tip: "Le monde évolue vite. Exemple : lire 20 minutes par jour peut transformer votre vision en quelques années." },
+        { cat: "perso", num: "3️⃣", title: "Est‑ce que je lis, me forme ou développe mes connaissances régulièrement ?", tip: "La lecture élargit la perspective. Tip : au moins un livre utile par mois." },
+        { cat: "perso", num: "4️⃣", title: "Est‑ce que je travaille sur des projets concrets qui développent mon expérience ?", tip: "La théorie est utile, mais la pratique crée la vraie compétence. Exemple : créer un petit projet personnel." },
+        { cat: "perso", num: "5️⃣", title: "Est‑ce que je prends le temps d’améliorer mes compétences clés ?", tip: "Identifier 3 compétences majeures à développer sur 5 ans." },
+        { cat: "perso", num: "6️⃣", title: "Est‑ce que je développe ma discipline personnelle ?", tip: "La discipline permet de continuer même sans motivation. Exemple : se lever à heure fixe." },
+        { cat: "perso", num: "7️⃣", title: "Est‑ce que je suis capable de travailler même quand la motivation diminue ?", tip: "Créer des routines de travail simples et répétables." },
+        { cat: "perso", num: "8️⃣", title: "Est‑ce que je sais transformer mes erreurs en apprentissages ?", tip: "Chaque échec contient une leçon. Les entrepreneurs qui réussissent ont souvent échoué avant." },
+        { cat: "perso", num: "9️⃣", title: "Est‑ce que je développe ma réputation et ma crédibilité ?", tip: "La confiance des autres attire les opportunités. Toujours tenir ses engagements." },
+        { cat: "perso", num: "🔟", title: "Est‑ce que je suis capable d’expliquer clairement mes idées et mes projets ?", tip: "Savoir présenter son projet en 1 minute peut ouvrir des portes." },
+
+        // 1️⃣1️⃣ - 2️⃣0️⃣ Opportunités et action
+        { cat: "action", num: "1️⃣1️⃣", title: "Si une opportunité arrive, ai‑je les moyens d’agir ?", tip: "Garder un fonds d’opportunité ou des partenaires fiables." },
+        { cat: "action", num: "1️⃣2️⃣", title: "Est‑ce que je prends des initiatives ou j’attends que les choses arrivent ?", tip: "Les personnes proactives rencontrent plus de chance." },
+        { cat: "action", num: "1️⃣3️⃣", title: "Est‑ce que je sais reconnaître une opportunité quand elle apparaît ?", tip: "Parfois les opportunités ressemblent à des problèmes. Exemple : un besoin du marché." },
+        { cat: "action", num: "1️⃣4️⃣", title: "Est‑ce que je sais agir rapidement lorsqu’une porte s’ouvre ?", tip: "Apprendre à prendre des décisions rapides mais réfléchies." },
+        { cat: "action", num: "1️⃣5️⃣", title: "Est‑ce que je prends parfois des risques calculés ?", tip: "Lancer un projet ou investir dans une idée comporte un risque maîtrisé." },
+        { cat: "action", num: "1️⃣6️⃣", title: "Est‑ce que je consacre du temps à des projets à long terme ?", tip: "Travailler sur une vision à 5 ou 10 ans." },
+        { cat: "action", num: "1️⃣7️⃣", title: "Est‑ce que je transforme les problèmes en opportunités ?", tip: "Une difficulté logistique peut devenir un service." },
+        { cat: "action", num: "1️⃣8️⃣", title: "Est‑ce que je teste régulièrement de nouvelles idées ?", tip: "Lancer des petits projets pilotes pour apprendre vite." },
+        { cat: "action", num: "1️⃣9️⃣", title: "Est‑ce que je suis prêt à sortir de ma zone de confort ?", tip: "Parler en public, lancer un projet inédit." },
+        { cat: "action", num: "2️⃣0️⃣", title: "Est‑ce que je me prépare aujourd’hui à des opportunités que je ne vois pas encore ?", tip: "Développer des compétences d'avenir (IA, données, etc.)." },
+
+        // 2️⃣1️⃣ - 2️⃣7️⃣ Réseau et environnement
+        { cat: "reseau", num: "2️⃣1️⃣", title: "Ai‑je un réseau de personnes qui peuvent m’ouvrir des portes ?", tip: "Entretenir les relations sincèrement." },
+        { cat: "reseau", num: "2️⃣2️⃣", title: "Est‑ce que je rencontre régulièrement de nouvelles personnes ?", tip: "Chaque rencontre peut apporter une idée." },
+        { cat: "reseau", num: "2️⃣3️⃣", title: "Est‑ce que je m’entoure de personnes positives et ambitieuses ?", tip: "L’environnement influence la mentalité." },
+        { cat: "reseau", num: "2️⃣4️⃣", title: "Est‑ce que je partage mes idées et mes projets avec d’autres ?", tip: "Les idées partagées attirent des partenaires." },
+        { cat: "reseau", num: "2️⃣5️⃣", title: "Est‑ce que je contribue à des projets visibles ?", tip: "La visibilité attire les opportunités." },
+        { cat: "reseau", num: "2️⃣6️⃣", title: "Est‑ce que je développe des relations de confiance ?", tip: "La confiance est un capital social précieux." },
+        { cat: "reseau", num: "2️⃣7️⃣", title: "Est‑ce que je suis prêt à aider les autres sans attendre immédiatement un retour ?", tip: "Aider crée souvent des opportunités indirectes." },
+
+        // 2️⃣8️⃣ - 3️⃣4️⃣ Spiritualité et baraka
+        { cat: "spirituel", num: "2️⃣8️⃣", title: "Est‑ce que je demande à Allah la baraka dans mes projets ?", tip: "La baraka multiplie les effets des efforts." },
+        { cat: "spirituel", num: "2️⃣9️⃣", title: "Est‑ce que je fais régulièrement du dzikr ?", tip: "Le rappel d’Allah apporte paix intérieure et clarté." },
+        { cat: "spirituel", num: "3️⃣0️⃣", title: "Est‑ce que je pratique la sadaka ?", tip: "La charité attire la bénédiction." },
+        { cat: "spirituel", num: "3️⃣1️⃣", title: "Est‑ce que je pratique parfois le jeûne volontaire ?", tip: "Le jeûne développe la discipline spirituelle." },
+        { cat: "spirituel", num: "3️⃣2️⃣", title: "Est‑ce que je pratique la prière de nuit ?", tip: "Renforce la connexion avec Allah." },
+        { cat: "spirituel", num: "3️⃣3️⃣", title: "Est‑ce que je cherche la baraka des parents ?", tip: "Leur satisfaction est une source immense de bénédictions." },
+        { cat: "spirituel", num: "3️⃣4️⃣", title: "Est‑ce que je fais des invocations pour mes projets ?", tip: "Les invocations accompagnent les efforts." },
+
+        // 3️⃣5️⃣ - 4️⃣0️⃣ Équilibre, hygiène de vie
+        { cat: "equilibre", num: "3️⃣5️⃣", title: "Est‑ce que je pratique parfois la roqya ?", tip: "Renforce la protection spirituelle." },
+        { cat: "equilibre", num: "3️⃣6️⃣", title: "Est‑ce que j’ai une routine du matin (Miracle Morning) ?", tip: "Un bon début de journée améliore la productivité." },
+        { cat: "equilibre", num: "3️⃣7️⃣", title: "Est‑ce que je prends soin de ma santé ?", tip: "La santé donne l’énergie pour saisir les opportunités." },
+        { cat: "equilibre", num: "3️⃣8️⃣", title: "Est‑ce que je prends du temps pour réfléchir et planifier ma vie ?", tip: "La réflexion permet de rester aligné." },
+        { cat: "equilibre", num: "3️⃣9️⃣", title: "Est‑ce que je développe un projet vert ou naturel ?", tip: "Un potager ou un jardin peut apporter sérénité." },
+        { cat: "equilibre", num: "4️⃣0️⃣", title: "Est‑ce que je pratique la gratitude ?", tip: "Remercier pour ce que l’on a attire souvent plus de bien." }
+      ];
+
+      // Catégories pour les onglets (ordre, libellé, icône)
+      const categories = [
+        { id: "perso", label: "🧠 Préparation", icon: "bi-person-up" },
+        { id: "action", label: "🚀 Opportunités", icon: "bi-rocket" },
+        { id: "reseau", label: "🤝 Réseau", icon: "bi-people" },
+        { id: "spirituel", label: "🌙 Baraka", icon: "bi-moon-stars" },
+        { id: "equilibre", label: "⚖️ Équilibre", icon: "bi-heart-pulse" }
+      ];
+
+      // Regroupement des questions par catégorie
+      const grouped = {};
+      categories.forEach(c => grouped[c.id] = []);
+      questionsData.forEach(q => grouped[q.cat].push(q));
+
+      // Remplir les onglets et le contenu
+      const tabsContainer = document.getElementById('categoryTabs');
+      const contentContainer = document.getElementById('categoryTabContent');
+      
+      // Créer les boutons d'onglet
+      categories.forEach((cat, idx) => {
+        const li = document.createElement('li');
+        li.className = 'nav-item';
+        const btn = document.createElement('button');
+        btn.className = `nav-link ${idx === 0 ? 'active' : ''}`;
+        btn.id = `tab-${cat.id}`;
+        btn.setAttribute('data-bs-toggle', 'tab');
+        btn.setAttribute('data-bs-target', `#panel-${cat.id}`);
+        btn.type = 'button';
+        btn.role = 'tab';
+        btn.innerHTML = `<i class="bi ${cat.icon}"></i> ${cat.label} (${grouped[cat.id].length})`;
+        li.appendChild(btn);
+        tabsContainer.appendChild(li);
+      });
+
+      // Créer les panneaux .tab-pane
+      categories.forEach((cat, idx) => {
+        const pane = document.createElement('div');
+        pane.className = `tab-pane fade ${idx === 0 ? 'show active' : ''}`;
+        pane.id = `panel-${cat.id}`;
+        pane.role = 'tabpanel';
+        
+        // Grille de cartes
+        const row = document.createElement('div');
+        row.className = 'row g-4';
+        
+        grouped[cat.id].forEach((q, qIndex) => {
+          const col = document.createElement('div');
+          col.className = 'col-lg-6 col-xl-6 fade-question';
+          col.style.animationDelay = (qIndex * 0.03) + 's';
+          
+          // génération d'un id unique pour le slider
+          const sliderId = `q_${cat.id}_${qIndex}_${Date.now() + Math.random()}`.replace(/\./g,'');
+          
+          col.innerHTML = `
+            <div class="card-question">
+              <div class="card-header-q">
+                <i class="bi bi-patch-question-fill"></i> ${q.num} ${q.title}
+              </div>
+              <div class="question-tip">
+                <i class="bi bi-lightbulb-fill"></i> ${q.tip}
+              </div>
+              <div class="slider-block">
+                <label class="form-label fw-semibold">Auto‑évaluation (0 = pas du tout, 5 = parfaitement)</label>
+                <input type="range" class="form-range" min="0" max="5" step="1" value="3" id="${sliderId}">
+                <div class="d-flex justify-content-between px-1 small-note">
+                  <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+                </div>
+                <div class="badge-value" id="val_${sliderId}">Valeur : 3</div>
+              </div>
+            </div>
+          `;
+          row.appendChild(col);
+          
+          // Attacher l'événement après insertion
+          setTimeout(() => {
+            const range = document.getElementById(sliderId);
+            const valSpan = document.getElementById(`val_${sliderId}`);
+            if (range && valSpan) {
+              range.addEventListener('input', function() {
+                valSpan.textContent = `Valeur : ${this.value}`;
+              });
+            }
+          }, 10);
+        });
+        
+        pane.appendChild(row);
+        contentContainer.appendChild(pane);
+      });
+
+      // ---------- SCORE ----------
+      const calculateBtn = document.getElementById('calculateScoreBtn');
+      const scoreDiv = document.getElementById('scoreResult');
+      const scoreSpan = document.getElementById('scoreValue');
+      const progressBar = document.getElementById('scoreProgress');
+      const interpretation = document.getElementById('scoreInterpretation');
+      const resetBtn = document.getElementById('resetAllBtn');
+
+      function getAllRanges() {
+        return document.querySelectorAll('input[type="range"].form-range');
+      }
+
+      function calculateScore() {
+        const ranges = getAllRanges();
+        let total = 0;
+        ranges.forEach(r => total += parseInt(r.value, 10) || 0);
+        return total;
+      }
+
+      calculateBtn.addEventListener('click', function() {
+        const total = calculateScore();
+        scoreSpan.innerText = total;
+        const percent = (total / 200) * 100;
+        progressBar.style.width = percent + '%';
+        
+        let msg = '';
+        if (total <= 70) msg = "😐 Vous êtes encore en phase de préparation. Travaillez vos compétences, votre réseau et votre constance.";
+        else if (total <= 130) msg = "🙂 Bonne base ! Vous êtes sur la bonne voie. Continuez à renforcer vos domaines faibles et à cultiver la baraka.";
+        else msg = "🌟 Exceptionnel ! Votre niveau de préparation est élevé. La chance va frapper, restez attentif et reconnaissant.";
+        
+        interpretation.innerText = msg;
+        scoreDiv.style.display = 'block';
+        scoreDiv.scrollIntoView({ behavior: 'smooth' });
+      });
+
+      resetBtn.addEventListener('click', function() {
+        const ranges = getAllRanges();
+        ranges.forEach(r => {
+          r.value = 3;
+          // Màj des badges associés (l'id du badge est 'val_' + id_du_range)
+          const badge = document.getElementById('val_' + r.id);
+          if (badge) badge.textContent = 'Valeur : 3';
+        });
+        scoreDiv.style.display = 'none';
+      });
+
+      // petit raffinement : cacher le score au reset (déjà fait)
+    })();
+  </script>
+
+  <!-- correction pour l'affichage des émojis numériques (certains navigateurs) -->
+  <style>
+    .card-header-q {
+      font-weight: 600;
+    }
+    .bi::before { vertical-align: middle; }
+    .nav-tabs-custom .nav-link { white-space: nowrap; }
+    @media (max-width: 768px) {
+      .nav-tabs-custom .nav-link { padding: 0.5rem 1rem; font-size: 0.9rem; }
+      .hero-chance h1 { font-size: 2.3rem; }
+    }
+  </style>
+</body>
+</html>
