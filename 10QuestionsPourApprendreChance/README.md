@@ -1,4 +1,4 @@
-```md
+
 # 🍀 La chance est-elle une compétence ?
 
 On dit souvent que la chance est un hasard.  
@@ -100,4 +100,4 @@ Elle récompense souvent ceux qui :
 👉 La vraie question est :
 
 **Si la chance arrive demain… suis-je prêt ?** 🍀
-```
+
