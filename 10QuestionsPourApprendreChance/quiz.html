@@ -1,0 +1,2056 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍀 Quiz Chance & Compétence – 80 questions apprenantes</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --deep-green: #1e4a3b;
+            --medium-green: #2c7a4d;
+            --accent-gold: #f4c542;
+            --soft-cream: #f8f9f3;
+            --light-bg: #f0f7f4;
+            --dark-bg: #0f2e24;
+            --card-bg: #ffffff;
+            --text-color: #1e293b;
+            --text-light: #4d6a5f;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--deep-green) 0%, var(--medium-green) 100%);
+            color: var(--text-color);
+            min-height: 100vh;
+            padding-top: 1rem;
+            background-attachment: fixed;
+        }
+
+        .quiz-container {
+            max-width: 1000px;
+            margin: auto;
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #1e4a3b 100%);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 15px;
+            margin-top: -1rem;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .quiz-header::before {
+            content: "🍀";
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            font-size: 150px;
+            opacity: 0.1;
+            transform: rotate(20deg);
+        }
+
+        .quiz-header h1 {
+            font-weight: 800;
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, var(--accent-gold) 0%, #f0b82e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .quiz-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .year-badge {
+            background: linear-gradient(135deg, var(--accent-gold) 0%, var(--deep-green) 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            display: inline-block;
+            margin-top: 0.5rem;
+            box-shadow: 0 4px 15px rgba(244, 197, 66, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .progress-container {
+            margin-bottom: 2rem;
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid #e2e8f0;
+        }
+
+        #question-counter {
+            font-weight: 600;
+            color: var(--deep-green);
+            font-size: 1.1rem;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        #current-score {
+            font-weight: 600;
+            color: var(--medium-green);
+            font-size: 1.1rem;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .progress {
+            height: 12px;
+            border-radius: 10px;
+            background-color: #e2e8f0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            border-radius: 10px;
+            background: linear-gradient(90deg, var(--deep-green) 0%, var(--accent-gold) 100%);
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px rgba(44, 122, 77, 0.3);
+        }
+
+        #question-card {
+            border: none;
+            border-radius: 15px;
+            padding: 2rem;
+            background: linear-gradient(135deg, #ffffff 0%, var(--soft-cream) 100%);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+            border-left: 5px solid var(--accent-gold);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #question-text {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+            line-height: 1.5;
+        }
+
+        .thematic-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            border: 2px solid;
+        }
+
+        .badge-preparation {
+            background-color: rgba(30, 74, 59, 0.1);
+            border-color: var(--deep-green);
+            color: var(--deep-green);
+        }
+        .badge-action {
+            background-color: rgba(244, 197, 66, 0.1);
+            border-color: var(--accent-gold);
+            color: #b68b2c;
+        }
+        .badge-reseau {
+            background-color: rgba(44, 122, 77, 0.1);
+            border-color: var(--medium-green);
+            color: var(--medium-green);
+        }
+        .badge-spirituel {
+            background-color: rgba(139, 92, 246, 0.1);
+            border-color: #8b5cf6;
+            color: #8b5cf6;
+        }
+        .badge-equilibre {
+            background-color: rgba(245, 158, 11, 0.1);
+            border-color: #f59e0b;
+            color: #f59e0b;
+        }
+        .badge-bonnes {
+            background-color: rgba(16, 185, 129, 0.1);
+            border-color: #10b981;
+            color: #10b981;
+        }
+        .badge-erreurs {
+            background-color: rgba(239, 68, 68, 0.1);
+            border-color: #ef4444;
+            color: #ef4444;
+        }
+        .badge-concepts {
+            background-color: rgba(99, 102, 241, 0.1);
+            border-color: #6366f1;
+            color: #6366f1;
+        }
+
+        .option-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 1rem 1.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+            border-radius: 12px;
+            border: 2px solid #e2e8f0;
+            background-color: white;
+            transition: all 0.3s ease;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .option-btn:hover:not([disabled]) {
+            border-color: var(--medium-green);
+            background-color: #e6f4ea;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(44, 122, 77, 0.15);
+        }
+        
+        .option-btn.correct {
+            background-color: #f0fdf4;
+            border-color: var(--medium-green);
+            color: #065f46;
+            font-weight: 600;
+        }
+
+        .option-btn.incorrect {
+            background-color: #fef2f2;
+            border-color: #ef4444;
+            color: #7f1d1d;
+            font-weight: 600;
+        }
+
+        #explanation-box {
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 1.5rem;
+            font-size: 1rem;
+            animation: fadeIn 0.5s ease;
+            border-left: 4px solid;
+        }
+        
+        .explanation-correct {
+            background-color: #f0fdf4;
+            border-left-color: var(--medium-green);
+        }
+
+        .explanation-incorrect {
+            background-color: #fef2f2;
+            border-left-color: #ef4444;
+        }
+
+        .tip-box {
+            background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
+            border-left: 4px solid var(--accent-gold);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+        }
+        
+        .tip-box h6 {
+            color: var(--deep-green);
+            font-weight: 600;
+        }
+
+        .quiz-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .nav-btn {
+            font-weight: 600;
+            padding: 0.75rem 2rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-audit {
+            background: linear-gradient(135deg, var(--deep-green) 0%, var(--medium-green) 100%);
+            color: white;
+            border: none;
+        }
+
+        .theme-card {
+            background: linear-gradient(135deg, #ffffff 0%, var(--soft-cream) 100%);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border: 2px solid #e2e8f0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .theme-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: var(--accent-gold);
+        }
+        
+        .theme-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--deep-green) 0%, var(--accent-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #1e4a3b 100%);
+            color: white;
+            border-radius: 0;
+        }
+
+        .final-score {
+            font-size: 4rem;
+            font-weight: 800;
+            margin: 1rem 0;
+            background: linear-gradient(135deg, var(--deep-green) 0%, var(--accent-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .score-text {
+            font-size: 1.5rem;
+            color: var(--text-color);
+        }
+
+        .skill-meter {
+            background: var(--light-bg);
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(244, 197, 66, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(244, 197, 66, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(244, 197, 66, 0); }
+        }
+
+        .finance-badge {
+            background: linear-gradient(135deg, var(--deep-green) 0%, var(--medium-green) 100%);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        @media (max-width: 768px) {
+            .quiz-container {
+                padding: 1rem;
+            }
+            .quiz-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-4">
+        <div class="quiz-container">
+            <div class="quiz-header">
+                <h1><i class="fas fa-clover"></i> Quiz Chance & Compétence <i class="fas fa-brain"></i></h1>
+                <p>Maîtrisez les clés de la chance : préparation, action, réseau, spiritualité, équilibre.</p>
+                <div class="year-badge">
+                    🍀 80 questions apprenantes – Devenez un aimant à opportunités
+                </div>
+            </div>
+            
+            <!-- Configuration Panel -->
+            <div id="settings-panel" class="settings-panel">
+                <h4 class="text-center mb-4"><i class="fas fa-sliders-h"></i> Configurez votre apprentissage</h4>
+                
+                <div class="row mb-4">
+                    <div class="col-md-8">
+                        <label for="question-count" class="form-label">Nombre de questions :</label>
+                        <select id="question-count" class="form-select">
+                            <option value="20">20 questions (Rapide)</option>
+                            <option value="40">40 questions (Standard)</option>
+                            <option value="60">60 questions (Approfondi)</option>
+                            <option value="80" selected>80 questions (Complet – recommandé)</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 d-flex align-items-end">
+                        <button id="start-quiz-btn" class="btn btn-audit w-100 pulse-animation">
+                            <i class="fas fa-rocket"></i> Démarrer
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <h5><i class="fas fa-filter"></i> Thématiques à réviser</h5>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="domain-preparation" checked>
+                                <label class="form-check-label" for="domain-preparation">
+                                    <i class="fas fa-user-graduate text-success me-2"></i>Préparation personnelle
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="domain-action" checked>
+                                <label class="form-check-label" for="domain-action">
+                                    <i class="fas fa-rocket text-warning me-2"></i>Opportunités & action
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="domain-reseau" checked>
+                                <label class="form-check-label" for="domain-reseau">
+                                    <i class="fas fa-handshake text-info me-2"></i>Réseau & environnement
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="domain-spirituel" checked>
+                                <label class="form-check-label" for="domain-spirituel">
+                                    <i class="fas fa-moon text-purple me-2"></i>Spiritualité & baraka
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="domain-equilibre" checked>
+                                <label class="form-check-label" for="domain-equilibre">
+                                    <i class="fas fa-heartbeat text-danger me-2"></i>Équilibre & hygiène de vie
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="domain-bonnes" checked>
+                                <label class="form-check-label" for="domain-bonnes">
+                                    <i class="fas fa-thumbs-up text-primary me-2"></i>Bonnes pratiques
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="domain-erreurs" checked>
+                                <label class="form-check-label" for="domain-erreurs">
+                                    <i class="fas fa-exclamation-triangle text-danger me-2"></i>Erreurs fréquentes
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" id="domain-concepts" checked>
+                                <label class="form-check-label" for="domain-concepts">
+                                    <i class="fas fa-lightbulb text-warning me-2"></i>Concepts clés
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mini présentation des thèmes -->
+                <div class="mt-4">
+                    <h5><i class="fas fa-brain"></i> 8 domaines pour cultiver votre chance</h5>
+                    <div class="row mt-3">
+                        <div class="col-md-3 mb-3"><div class="theme-card"><div class="theme-icon"><i class="fas fa-user-graduate"></i></div><h6>Préparation</h6><span class="finance-badge">Compétences</span><span class="finance-badge">Discipline</span></div></div>
+                        <div class="col-md-3 mb-3"><div class="theme-card"><div class="theme-icon"><i class="fas fa-rocket"></i></div><h6>Action</h6><span class="finance-badge">Risques</span><span class="finance-badge">Réactivité</span></div></div>
+                        <div class="col-md-3 mb-3"><div class="theme-card"><div class="theme-icon"><i class="fas fa-handshake"></i></div><h6>Réseau</h6><span class="finance-badge">Confiance</span><span class="finance-badge">Entraide</span></div></div>
+                        <div class="col-md-3 mb-3"><div class="theme-card"><div class="theme-icon"><i class="fas fa-moon"></i></div><h6>Spiritualité</h6><span class="finance-badge">Baraka</span><span class="finance-badge">Dzikr</span></div></div>
+                        <div class="col-md-3 mb-3"><div class="theme-card"><div class="theme-icon"><i class="fas fa-heartbeat"></i></div><h6>Équilibre</h6><span class="finance-badge">Santé</span><span class="finance-badge">Routine</span></div></div>
+                        <div class="col-md-3 mb-3"><div class="theme-card"><div class="theme-icon"><i class="fas fa-thumbs-up"></i></div><h6>Bonnes pratiques</h6><span class="finance-badge">Gratitude</span><span class="finance-badge">Objectifs</span></div></div>
+                        <div class="col-md-3 mb-3"><div class="theme-card"><div class="theme-icon"><i class="fas fa-exclamation-triangle"></i></div><h6>Erreurs</h6><span class="finance-badge">Procrastination</span><span class="finance-badge">Isolement</span></div></div>
+                        <div class="col-md-3 mb-3"><div class="theme-card"><div class="theme-icon"><i class="fas fa-lightbulb"></i></div><h6>Concepts</h6><span class="finance-badge">Chance = f(Préparation,Action)</span></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quiz Content -->
+            <div id="quiz-content" class="d-none">
+                <div class="progress-container">
+                     <div class="d-flex justify-content-between align-items-center mb-2">
+                        <span id="question-counter">Question 1 / 80</span>
+                        <span id="current-score">Score: 0</span>
+                     </div>
+                    <div class="progress">
+                        <div id="progress-bar" class="progress-bar" role="progressbar" style="width: 1.25%;" aria-valuenow="1.25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+
+                <div id="question-card" class="card">
+                    <div class="card-body">
+                        <div class="thematic-badge" id="thematic-badge">Préparation</div>
+                        <h2 id="question-text">Chargement de la question...</h2>
+                        <div id="options-container">
+                            <!-- Les options seront insérées ici -->
+                        </div>
+                        <div id="explanation-box" class="d-none">
+                            <h5 id="explanation-title"></h5>
+                            <p id="explanation-text"></p>
+                            <div id="tip-box" class="tip-box d-none">
+                                <h6><i class="fas fa-lightbulb"></i> Conseil pour cultiver votre chance</h6>
+                                <p id="tip-text"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-navigation">
+                    <button id="prev-btn" class="btn btn-outline-secondary nav-btn" disabled>
+                        <i class="fas fa-arrow-left"></i> Précédent
+                    </button>
+                    <button id="next-btn" class="btn btn-audit nav-btn">
+                        Suivant <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button id="finish-btn" class="btn btn-success nav-btn d-none">
+                        <i class="fas fa-trophy"></i> Voir mes résultats
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Résultats -->
+    <div class="modal fade" id="resultsModal" tabindex="-1" aria-labelledby="resultsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="resultsModalLabel">
+                        <i class="fas fa-chart-line modal-title-icon"></i> Votre profil de chance
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="text-center mb-4">
+                        <h4 class="score-text">Votre capacité à attirer la chance :</h4>
+                        <p class="final-score" id="final-score-percentage">0%</p>
+                        <p class="text-muted fs-5">
+                            <span id="final-score-correct">0</span> bonnes réponses sur 
+                            <span id="final-score-total">0</span> questions
+                        </p>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="skill-meter">
+                                <h6><i class="fas fa-user-graduate"></i> Préparation & Compétences</h6>
+                                <div class="progress mt-2" style="height: 20px;">
+                                    <div id="skill-preparation" class="progress-bar bg-success" style="width: 0%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="skill-meter">
+                                <h6><i class="fas fa-rocket"></i> Action & Opportunités</h6>
+                                <div class="progress mt-2" style="height: 20px;">
+                                    <div id="skill-action" class="progress-bar bg-warning" style="width: 0%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="skill-meter">
+                                <h6><i class="fas fa-handshake"></i> Réseau</h6>
+                                <div class="progress mt-2" style="height: 20px;">
+                                    <div id="skill-reseau" class="progress-bar bg-info" style="width: 0%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="skill-meter">
+                                <h6><i class="fas fa-moon"></i> Spiritualité</h6>
+                                <div class="progress mt-2" style="height: 20px;">
+                                    <div id="skill-spirituel" class="progress-bar bg-purple" style="width: 0%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="skill-meter">
+                                <h6><i class="fas fa-heartbeat"></i> Équilibre</h6>
+                                <div class="progress mt-2" style="height: 20px;">
+                                    <div id="skill-equilibre" class="progress-bar bg-danger" style="width: 0%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="skill-meter">
+                                <h6><i class="fas fa-thumbs-up"></i> Bonnes pratiques</h6>
+                                <div class="progress mt-2" style="height: 20px;">
+                                    <div id="skill-bonnes" class="progress-bar bg-primary" style="width: 0%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <hr class="my-4">
+                    
+                    <div id="final-recommendations">
+                        <!-- Recommandations personnalisées -->
+                    </div>
+                    
+                    <div class="mt-4">
+                        <h5><i class="fas fa-road"></i> Votre chemin vers une chance durable</h5>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <div class="alert alert-success">
+                                    <h6><i class="fas fa-leaf"></i> Points forts à cultiver</h6>
+                                    <p id="strengths" class="small mb-0">...</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="alert alert-warning">
+                                    <h6><i class="fas fa-seedling"></i> Axes d'amélioration</h6>
+                                    <p id="weaknesses" class="small mb-0">...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times"></i> Fermer
+                    </button>
+                    <button type="button" class="btn btn-audit" id="restart-quiz-btn">
+                        <i class="fas fa-redo"></i> Recommencer
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // ------------------------------------------------------------
+        // 80 QUESTIONS basées sur index.html (Chance & Compétence)
+        // ------------------------------------------------------------
+        const quizData = {
+            questions: [
+                // ============ THÈME 1: PRÉPARATION PERSONNELLE (12) ============
+                {
+                    thematic: "Préparation",
+                    question: "Selon l'audit, que faire pour être prêt quand une opportunité se présente ?",
+                    options: [
+                        "Attendre que l'opportunité frappe à la porte",
+                        "Développer ses compétences en amont",
+                        "Compter sur la chance uniquement",
+                        "Rien, cela dépend du destin"
+                    ],
+                    correctAnswer: "Développer ses compétences en amont",
+                    explanation: "La chance arrive quand la préparation rencontre l'opportunité. Identifiez les compétences demandées et formez-vous avant d'en avoir besoin.",
+                    tip: "Exemple : apprenez la programmation avant qu'une startup tech ne recrute."
+                },
+                {
+                    thematic: "Préparation",
+                    question: "Quelle habitude quotidienne est recommandée pour améliorer ses connaissances ?",
+                    options: [
+                        "Regarder la télévision 2 heures",
+                        "Lire 20 minutes par jour",
+                        "Jouer aux jeux vidéo",
+                        "Faire une sieste"
+                    ],
+                    correctAnswer: "Lire 20 minutes par jour",
+                    explanation: "20 minutes de lecture par jour = environ 15 livres par an, ce qui élargit votre vision et votre capacité à repérer des opportunités.",
+                    tip: "Fixez-vous un objectif d'un livre utile par mois."
+                },
+                {
+                    thematic: "Préparation",
+                    question: "Pourquoi est-il important de travailler sur des projets concrets ?",
+                    options: [
+                        "Pour gagner de l'argent immédiatement",
+                        "Parce que la théorie seule ne suffit pas",
+                        "Pour impressionner ses amis",
+                        "C'est obligatoire dans le cursus"
+                    ],
+                    correctAnswer: "Parce que la théorie seule ne suffit pas",
+                    explanation: "Un projet personnel (site web, potager, association) vous apprend plus que dix cours théoriques.",
+                    tip: "Lancez une petite application mobile pour apprendre le codage."
+                },
+                {
+                    thematic: "Préparation",
+                    question: "Quelle est la recommandation pour développer ses compétences clés sur 5 ans ?",
+                    options: [
+                        "Changer de métier chaque année",
+                        "Choisir 3 compétences majeures et les travailler régulièrement",
+                        "Attendre une formation financée par l'entreprise",
+                        "Suivre toutes les modes"
+                    ],
+                    correctAnswer: "Choisir 3 compétences majeures et les travailler régulièrement",
+                    explanation: "Exemple : anglais, codage, négociation – 30 minutes par jour d'anglais peut vous rendre bilingue en 2 ans.",
+                    tip: "La régularité prime sur l'intensité."
+                },
+                {
+                    thematic: "Préparation",
+                    question: "Comment la discipline personnelle peut-elle être renforcée ?",
+                    options: [
+                        "En se fixant des routines simples et stables",
+                        "En travaillant uniquement quand on est motivé",
+                        "En dormant tard le week-end",
+                        "En évitant les contraintes"
+                    ],
+                    correctAnswer: "En se fixant des routines simples et stables",
+                    explanation: "Exemple : se lever à 6h30 tous les jours, même le week-end, pour gagner 1h de travail calme.",
+                    tip: "La discipline remplace la motivation sur le long terme."
+                },
+                {
+                    thematic: "Préparation",
+                    question: "Que faire quand la motivation baisse ?",
+                    options: [
+                        "Arrêter et attendre qu'elle revienne",
+                        "S'appuyer sur la discipline et des objectifs visibles",
+                        "Changer d'objectif",
+                        "Se forcer sans méthode"
+                    ],
+                    correctAnswer: "S'appuyer sur la discipline et des objectifs visibles",
+                    explanation: "Placez vos objectifs en évidence pour vous y tenir, la discipline prend le relais.",
+                    tip: "Utilisez des rappels visuels (post-it, écran d'accueil)."
+                },
+                {
+                    thematic: "Préparation",
+                    question: "Comment transformer ses erreurs en apprentissages ?",
+                    options: [
+                        "Les ignorer",
+                        "Noter une leçon après chaque échec",
+                        "Se culpabiliser",
+                        "Les cacher"
+                    ],
+                    correctAnswer: "Noter une leçon après chaque échec",
+                    explanation: "Comme Edison, voyez chaque échec comme une découverte de ce qui ne fonctionne pas.",
+                    tip: "Tenez un journal des leçons apprises."
+                },
+                {
+                    thematic: "Préparation",
+                    question: "Pourquoi la réputation et la crédibilité sont-elles importantes ?",
+                    options: [
+                        "Pour être connu dans les médias",
+                        "Parce que les gens vous feront confiance et penseront à vous pour des opportunités",
+                        "Pour obtenir des réductions",
+                        "Pour avoir plus d'amis sur les réseaux"
+                    ],
+                    correctAnswer: "Parce que les gens vous feront confiance et penseront à vous pour des opportunités",
+                    explanation: "Tenir ses promesses, même petites, construit une réputation solide.",
+                    tip: "Si vous promettez un document avant vendredi, faites-le jeudi."
+                },
+                {
+                    thematic: "Préparation",
+                    question: "Qu'est-ce qu'un 'elevator pitch' ?",
+                    options: [
+                        "Un discours de vente dans un ascenseur",
+                        "Une présentation de projet en 1 minute",
+                        "Une technique de respiration",
+                        "Un type de contrat"
+                    ],
+                    correctAnswer: "Une présentation de projet en 1 minute",
+                    explanation: "Savoir expliquer clairement ses idées en peu de temps est crucial pour saisir des opportunités.",
+                    tip: "Entraînez-vous à présenter votre projet en 60 secondes."
+                },
+                {
+                    thematic: "Préparation",
+                    question: "Selon l'audit, combien de temps faut-il consacrer à la lecture pour des résultats significatifs ?",
+                    options: [
+                        "10 minutes par semaine",
+                        "20 minutes par jour",
+                        "1 heure par mois",
+                        "Un livre par an"
+                    ],
+                    correctAnswer: "20 minutes par jour",
+                    explanation: "Cela représente environ 15 livres par an, ce qui transforme votre base de connaissances.",
+                    tip: "Alternez lectures professionnelles et développement personnel."
+                },
+                {
+                    thematic: "Préparation",
+                    question: "Quelle est la première étape pour être prêt face à une opportunité ?",
+                    options: [
+                        "Attendre qu'elle arrive",
+                        "Identifier les compétences les plus demandées dans son domaine",
+                        "Préparer un discours",
+                        "Économiser de l'argent"
+                    ],
+                    correctAnswer: "Identifier les compétences les plus demandées dans son domaine",
+                    explanation: "Savoir ce qui est recherché permet de se former en conséquence.",
+                    tip: "Consultez les offres d'emploi pour repérer les compétences récurrentes."
+                },
+                {
+                    thematic: "Préparation",
+                    question: "Pourquoi est-il utile d'avoir une épargne de précaution ?",
+                    options: [
+                        "Pour acheter des objets de luxe",
+                        "Pour saisir une opportunité nécessitant un investissement (formation, déplacement)",
+                        "Pour payer ses impôts",
+                        "Pour faire plaisir à sa famille"
+                    ],
+                    correctAnswer: "Pour saisir une opportunité nécessitant un investissement (formation, déplacement)",
+                    explanation: "Avoir 3 mois de dépenses de côté permet de saisir une offre de formation à l'étranger ou un projet entrepreneurial.",
+                    tip: "Constituez une épargne de sécurité avant de chercher des opportunités."
+                },
+
+                // ============ THÈME 2: ACTION & OPPORTUNITÉS (12) ============
+                {
+                    thematic: "Action",
+                    question: "Que signifie 'prendre des initiatives' dans le contexte professionnel ?",
+                    options: [
+                        "Attendre les ordres",
+                        "Proposer des idées et agir sans attendre",
+                        "Critiquer les décisions",
+                        "Faire uniquement ce qui est demandé"
+                    ],
+                    correctAnswer: "Proposer des idées et agir sans attendre",
+                    explanation: "Lors de la prochaine réunion, suggérez un nouveau processus qui améliorerait la productivité.",
+                    tip: "Les opportunités naissent souvent de l'initiative personnelle."
+                },
+                {
+                    thematic: "Action",
+                    question: "Comment reconnaître une opportunité cachée ?",
+                    options: [
+                        "Elle est toujours évidente",
+                        "Elle ressemble parfois à un problème",
+                        "Elle est annoncée par un signe",
+                        "Elle vient toujours d'une personne"
+                    ],
+                    correctAnswer: "Elle ressemble parfois à un problème",
+                    explanation: "Exemple : une entreprise qui a du mal à recruter peut être une chance pour un consultant en RH.",
+                    tip: "Demandez-vous : quel problème puis-je résoudre ?"
+                },
+                {
+                    thematic: "Action",
+                    question: "Pourquoi faut-il agir rapidement quand une porte s'ouvre ?",
+                    options: [
+                        "Pour ne pas laisser passer l'occasion",
+                        "Parce que c'est une règle",
+                        "Pour impressionner",
+                        "Pour gagner du temps"
+                    ],
+                    correctAnswer: "Pour ne pas laisser passer l'occasion",
+                    explanation: "Prenez des décisions dans les 48h. Exemple : fixez un rendez-vous rapidement pour montrer votre réactivité.",
+                    tip: "La vitesse d'exécution est un facteur clé."
+                },
+                {
+                    thematic: "Action",
+                    question: "Qu'est-ce qu'un risque calculé ?",
+                    options: [
+                        "Un risque sans aucune préparation",
+                        "Un risque où l'on a évalué les gains potentiels et les pertes acceptables",
+                        "Un risque que tout le monde prend",
+                        "Un risque interdit"
+                    ],
+                    correctAnswer: "Un risque où l'on a évalué les gains potentiels et les pertes acceptables",
+                    explanation: "Exemple : investir 10% de son épargne dans un projet qui vous passionne.",
+                    tip: "N'ayez pas peur de sortir de votre zone de confort, mais mesurez les enjeux."
+                },
+                {
+                    thematic: "Action",
+                    question: "Pourquoi consacrer du temps à des projets à long terme ?",
+                    options: [
+                        "Parce que c'est plus facile",
+                        "Pour construire une vision sur 5 ou 10 ans",
+                        "Pour éviter le travail quotidien",
+                        "Pour suivre la mode"
+                    ],
+                    correctAnswer: "Pour construire une vision sur 5 ou 10 ans",
+                    explanation: "Écrivez votre plan de carrière idéal et révisez-le chaque année.",
+                    tip: "Les grandes réussites sont le fruit d'efforts constants sur la durée."
+                },
+                {
+                    thematic: "Action",
+                    question: "Comment transformer un problème en opportunité ?",
+                    options: [
+                        "En l'ignorant",
+                        "En se demandant 'quelle est l'opportunité cachée ?'",
+                        "En se plaignant",
+                        "En attendant qu'il disparaisse"
+                    ],
+                    correctAnswer: "En se demandant 'quelle est l'opportunité cachée ?'",
+                    explanation: "La pandémie a forcé beaucoup de commerces à passer au numérique, ouvrant un marché pour les webdesigners.",
+                    tip: "Adoptez une mentalité de 'problem solver'."
+                },
+                {
+                    thematic: "Action",
+                    question: "Qu'est-ce qu'un test de concept (MVP) ?",
+                    options: [
+                        "Un produit fini parfait",
+                        "Un mini-projet pilote pour valider une idée",
+                        "Une étude de marché coûteuse",
+                        "Un prototype sans intérêt"
+                    ],
+                    correctAnswer: "Un mini-projet pilote pour valider une idée",
+                    explanation: "Avant de créer une entreprise, testez votre concept avec un simple site vitrine et des pré-commandes.",
+                    tip: "Échouez vite, apprenez vite, ajustez."
+                },
+                {
+                    thematic: "Action",
+                    question: "Quelle est une bonne façon de sortir de sa zone de confort ?",
+                    options: [
+                        "Ne rien changer",
+                        "Faire chaque semaine une chose qui nous met mal à l'aise",
+                        "Attendre d'être forcé",
+                        "Regarder les autres"
+                    ],
+                    correctAnswer: "Faire chaque semaine une chose qui nous met mal à l'aise",
+                    explanation: "Exemple : parler en public, engager la conversation avec un inconnu.",
+                    tip: "Le malaise initial est le prix de la croissance."
+                },
+                {
+                    thematic: "Action",
+                    question: "Pourquoi se préparer à des opportunités que l'on ne voit pas encore ?",
+                    options: [
+                        "C'est impossible",
+                        "Pour être prêt quand elles émergeront (IA, blockchain, etc.)",
+                        "Pour perdre son temps",
+                        "Parce que c'est tendance"
+                    ],
+                    correctAnswer: "Pour être prêt quand elles émergeront (IA, blockchain, etc.)",
+                    explanation: "Développez des compétences d'avenir, comme suivre une introduction à l'intelligence artificielle.",
+                    tip: "Anticipez les tendances de fond."
+                },
+                {
+                    thematic: "Action",
+                    question: "Que faire si on vous propose un partenariat ?",
+                    options: [
+                        "Attendre un mois",
+                        "Répondre rapidement et fixer un rendez-vous",
+                        "Refuser poliment",
+                        "Demander un délai de réflexion de 6 mois"
+                    ],
+                    correctAnswer: "Répondre rapidement et fixer un rendez-vous",
+                    explanation: "La réactivité montre votre intérêt et votre professionnalisme.",
+                    tip: "Les bonnes opportunités ne se présentent pas deux fois."
+                },
+                {
+                    thematic: "Action",
+                    question: "Quel est le principal obstacle à l'action selon les retours d'expérience ?",
+                    options: [
+                        "Le manque de temps",
+                        "La procrastination",
+                        "Le manque d'argent",
+                        "Le manque d'idées"
+                    ],
+                    correctAnswer: "La procrastination",
+                    explanation: "Remettre toujours au lendemain ses projets et formations bloque toute progression.",
+                    tip: "Utilisez la technique Pomodoro pour démarrer."
+                },
+                {
+                    thematic: "Action",
+                    question: "Comment tester rapidement une idée sans gros investissement ?",
+                    options: [
+                        "Lancer une campagne de communication",
+                        "Créer un site minimal et recueillir des pré-inscriptions",
+                        "Emprunter de l'argent",
+                        "Attendre un an"
+                    ],
+                    correctAnswer: "Créer un site minimal et recueillir des pré-inscriptions",
+                    explanation: "Cela permet de valider l'intérêt sans risque financier majeur.",
+                    tip: "Utilisez des outils comme Google Forms ou Unbounce."
+                },
+
+                // ============ THÈME 3: RÉSEAU & ENVIRONNEMENT (10) ============
+                {
+                    thematic: "Réseau",
+                    question: "Comment construire un réseau sincère ?",
+                    options: [
+                        "Ajouter le maximum de contacts sur LinkedIn",
+                        "Cultiver des relations authentiques, sans rien attendre en retour",
+                        "Distribuer des cartes de visite",
+                        "Aller à toutes les soirées"
+                    ],
+                    correctAnswer: "Cultiver des relations authentiques, sans rien attendre en retour",
+                    explanation: "Invitez un ancien collègue à déjeuner sans rien demander, félicitez sincèrement.",
+                    tip: "La confiance se construit dans la durée."
+                },
+                {
+                    thematic: "Réseau",
+                    question: "Quelle est une bonne fréquence pour rencontrer de nouvelles personnes ?",
+                    options: [
+                        "Une fois par an",
+                        "Une fois par mois (meetup, conférence)",
+                        "Tous les jours",
+                        "Jamais"
+                    ],
+                    correctAnswer: "Une fois par mois (meetup, conférence)",
+                    explanation: "Assistez à un événement professionnel ou associatif régulièrement pour élargir votre cercle.",
+                    tip: "Préparez une question ouverte pour engager la conversation."
+                },
+                {
+                    thematic: "Réseau",
+                    question: "Pourquoi s'entourer de personnes positives et ambitieuses ?",
+                    options: [
+                        "Pour se sentir inférieur",
+                        "Parce que l'entourage influence notre niveau d'ambition",
+                        "Pour qu'elles fassent le travail à notre place",
+                        "Pour éviter les conflits"
+                    ],
+                    correctAnswer: "Parce que l'entourage influence notre niveau d'ambition",
+                    explanation: "Rejoignez un groupe de mastermind pour partager vos objectifs et vous motiver mutuellement.",
+                    tip: "Évaluez votre entourage : vous êtes la moyenne des 5 personnes que vous fréquentez."
+                },
+                {
+                    thematic: "Réseau",
+                    question: "Pourquoi partager ses projets autour de soi ?",
+                    options: [
+                        "Pour se vanter",
+                        "Pour trouver des associés, mentors ou retours",
+                        "Pour que quelqu'un les fasse à votre place",
+                        "Ce n'est pas utile"
+                    ],
+                    correctAnswer: "Pour trouver des associés, mentors ou retours",
+                    explanation: "En parlant de votre vision, vous pouvez rencontrer des personnes qui vous aideront.",
+                    tip: "Soyez ouvert aux critiques constructives."
+                },
+                {
+                    thematic: "Réseau",
+                    question: "Comment se faire connaître positivement ?",
+                    options: [
+                        "En faisant du bénévolat ou en contribuant à des projets open source",
+                        "En achetant des followers",
+                        "En parlant fort",
+                        "En critiquant les autres"
+                    ],
+                    correctAnswer: "En faisant du bénévolat ou en contribuant à des projets open source",
+                    explanation: "Contribuer à une association locale vous fera connaître et démontrera votre valeur.",
+                    tip: "Choisissez une cause qui vous tient à cœur."
+                },
+                {
+                    thematic: "Réseau",
+                    question: "Comment développer des relations de confiance ?",
+                    options: [
+                        "En étant fiable et en tenant ses engagements",
+                        "En promettant tout et n'importe quoi",
+                        "En évitant les contacts",
+                        "En offrant des cadeaux"
+                    ],
+                    correctAnswer: "En étant fiable et en tenant ses engagements",
+                    explanation: "Si vous recommandez quelqu'un, assurez-vous qu'il est compétent.",
+                    tip: "La confiance se gagne en goutte et se perd en litre."
+                },
+                {
+                    thematic: "Réseau",
+                    question: "Pourquoi aider les autres sans attendre de retour immédiat ?",
+                    options: [
+                        "Parce que c'est une perte de temps",
+                        "Parce que la générosité crée un cercle vertueux",
+                        "Pour obtenir une faveur plus tard",
+                        "Pour être apprécié"
+                    ],
+                    correctAnswer: "Parce que la générosité crée un cercle vertueux",
+                    explanation: "Mettez en relation deux personnes qui pourraient s'entraider ; la gratitude reviendra un jour.",
+                    tip: "Le donnant-donnant à court terme n'est pas toujours efficace."
+                },
+                {
+                    thematic: "Réseau",
+                    question: "Quelle est une erreur fréquente dans le réseau ?",
+                    options: [
+                        "Contacter ses relations seulement quand on a besoin d'elles",
+                        "Partager ses réussites",
+                        "Demander des conseils",
+                        "Remercier"
+                    ],
+                    correctAnswer: "Contacter ses relations seulement quand on a besoin d'elles",
+                    explanation: "Cultivez le lien même sans besoin, prenez des nouvelles régulièrement.",
+                    tip: "Programmez un rappel pour prendre des nouvelles tous les 3 mois."
+                },
+                {
+                    thematic: "Réseau",
+                    question: "Comment réagir face à un retour négatif d'un collègue ?",
+                    options: [
+                        "S'énerver",
+                        "L'ignorer",
+                        "L'écouter et en tirer des leçons",
+                        "Se venger"
+                    ],
+                    correctAnswer: "L'écouter et en tirer des leçons",
+                    explanation: "Ignorer les feedbacks mène à répéter les mêmes erreurs.",
+                    tip: "Remerciez la personne pour son honnêteté."
+                },
+                {
+                    thematic: "Réseau",
+                    question: "Que signifie 'avoir un réseau qui ouvre des portes' ?",
+                    options: [
+                        "Avoir des contacts qui vous recommandent spontanément",
+                        "Avoir des amis haut placés",
+                        "Connaître beaucoup de monde",
+                        "Être abonné à des newsletters"
+                    ],
+                    correctAnswer: "Avoir des contacts qui vous recommandent spontanément",
+                    explanation: "C'est le résultat de relations sincères et durables.",
+                    tip: "Travaillez votre réputation, pas seulement votre carnet d'adresses."
+                },
+
+                // ============ THÈME 4: SPIRITUALITÉ & BARAKA (10) ============
+                {
+                    thematic: "Spirituel",
+                    question: "Que signifie demander la baraka dans ses projets ?",
+                    options: [
+                        "Faire un sacrifice",
+                        "Invoquer la bénédiction divine avant d'agir",
+                        "Attendre un miracle",
+                        "Travailler sans relâche"
+                    ],
+                    correctAnswer: "Invoquer la bénédiction divine avant d'agir",
+                    explanation: "Exemple : dire 'Bismillah' et demander sincèrement la réussite.",
+                    tip: "La spiritualité peut apporter sérénité et focus."
+                },
+                {
+                    thematic: "Spirituel",
+                    question: "Qu'est-ce que le dzikr ?",
+                    options: [
+                        "Une danse",
+                        "Le rappel d'Allah (ex: répéter 'SubhanAllah')",
+                        "Un type de jeûne",
+                        "Une prière obligatoire"
+                    ],
+                    correctAnswer: "Le rappel d'Allah (ex: répéter 'SubhanAllah')",
+                    explanation: "Consacrez 5 minutes matin et soir au rappel pour apaiser le cœur.",
+                    tip: "La répétition des noms divins apporte la paix intérieure."
+                },
+                {
+                    thematic: "Spirituel",
+                    question: "Qu'est-ce que la sadaka ?",
+                    options: [
+                        "Un impôt",
+                        "Une aumône, même un sourire ou un conseil gratuit",
+                        "Un pèlerinage",
+                        "Un jeûne"
+                    ],
+                    correctAnswer: "Une aumône, même un sourire ou un conseil gratuit",
+                    explanation: "Donner même une petite somme chaque semaine est bénéfique.",
+                    tip: "La charité attire l'abondance."
+                },
+                {
+                    thematic: "Spirituel",
+                    question: "Pourquoi pratiquer le jeûne volontaire (ex: lundis et jeudis) ?",
+                    options: [
+                        "Pour perdre du poids",
+                        "Pour renforcer la discipline et la spiritualité",
+                        "Parce que c'est obligatoire",
+                        "Pour économiser de l'argent"
+                    ],
+                    correctAnswer: "Pour renforcer la discipline et la spiritualité",
+                    explanation: "C'est une pratique surérogatoire qui rapproche de Dieu et habitue à la maîtrise de soi.",
+                    tip: "Commencez par un jour par semaine."
+                },
+                {
+                    thematic: "Spirituel",
+                    question: "Que peut apporter la prière de nuit (tahajjud) ?",
+                    options: [
+                        "Une fatigue supplémentaire",
+                        "Une illumination spirituelle et des bénédictions",
+                        "Un gain de temps",
+                        "Rien de particulier"
+                    ],
+                    correctAnswer: "Une illumination spirituelle et des bénédictions",
+                    explanation: "Même deux petites rakats avant l'aube peuvent illuminer votre journée.",
+                    tip: "Levez-vous 15 minutes plus tôt."
+                },
+                {
+                    thematic: "Spirituel",
+                    question: "Comment obtenir la baraka des parents ?",
+                    options: [
+                        "En leur donnant de l'argent",
+                        "En prenant soin d'eux et en demandant leurs prières",
+                        "En les ignorant",
+                        "En vivant loin d'eux"
+                    ],
+                    correctAnswer: "En prenant soin d'eux et en demandant leurs prières",
+                    explanation: "Appelez vos parents régulièrement et demandez-leur de prier pour vous.",
+                    tip: "Leur satisfaction est une clé du succès."
+                },
+                {
+                    thematic: "Spirituel",
+                    question: "Quelle invocation faire avant d'étudier ?",
+                    options: [
+                        "Rien de spécial",
+                        "'Rabbi zidni ilma' (Seigneur, augmente mon savoir)",
+                        "Une chanson",
+                        "Un mantra quelconque"
+                    ],
+                    correctAnswer: "'Rabbi zidni ilma' (Seigneur, augmente mon savoir)",
+                    explanation: "Cette invocation est recommandée pour demander l'augmentation de la connaissance.",
+                    tip: "Accompagnez-la d'une intention sincère."
+                },
+                {
+                    thematic: "Spirituel",
+                    question: "Qu'est-ce que la roqya ?",
+                    options: [
+                        "Une incantation magique",
+                        "Une récitation de versets coraniques pour la protection",
+                        "Un régime alimentaire",
+                        "Une danse traditionnelle"
+                    ],
+                    correctAnswer: "Une récitation de versets coraniques pour la protection",
+                    explanation: "Récitez les sourates de protection (Al-Falaq, An-Nas) le matin pour vous sentir protégé.",
+                    tip: "Écouter la roqya peut apaiser l'anxiété."
+                },
+                {
+                    thematic: "Spirituel",
+                    question: "Pourquoi est-il important de faire des invocations pour ses projets ?",
+                    options: [
+                        "Pour que Dieu les réalise sans effort",
+                        "Pour accompagner l'action et demander la bénédiction",
+                        "Parce que c'est une obligation",
+                        "Pour impressionner les autres"
+                    ],
+                    correctAnswer: "Pour accompagner l'action et demander la bénédiction",
+                    explanation: "Invoquez avec persévérance, mais continuez à agir.",
+                    tip: "L'invocation est l'arme du croyant."
+                },
+                {
+                    thematic: "Spirituel",
+                    question: "Selon la sagesse populaire, la baraka peut être attirée par...",
+                    options: [
+                        "L'égoïsme",
+                        "La générosité et la gratitude",
+                        "La paresse",
+                        "La médisance"
+                    ],
+                    correctAnswer: "La générosité et la gratitude",
+                    explanation: "Remerciez pour ce que vous avez, et plus vous sera donné.",
+                    tip: "Pratiquez la gratitude chaque soir."
+                },
+
+                // ============ THÈME 5: ÉQUILIBRE & HYGIÈNE DE VIE (10) ============
+                {
+                    thematic: "Équilibre",
+                    question: "Que recommande l'audit pour une routine matinale idéale ?",
+                    options: [
+                        "Se lever tard, prendre son temps",
+                        "Se lever tôt, prier, lire, méditer, faire du sport",
+                        "Travailler immédiatement",
+                        "Regarder les actualités"
+                    ],
+                    correctAnswer: "Se lever tôt, prier, lire, méditer, faire du sport",
+                    explanation: "Exemple : 6h00 réveil, 6h15 prière, 6h45 lecture, 7h15 sport.",
+                    tip: "Le Miracle Morning (Hal Elrod) propose 6 pratiques : Silence, Affirmations, Visualisation, Sport, Lecture, Écriture."
+                },
+                {
+                    thematic: "Équilibre",
+                    question: "Combien de temps de sommeil est recommandé ?",
+                    options: [
+                        "5h",
+                        "7h",
+                        "10h",
+                        "Peu importe"
+                    ],
+                    correctAnswer: "7h",
+                    explanation: "Dormez 7h par nuit et marchez 30 minutes par jour pour une bonne santé.",
+                    tip: "Une promenade après le déjeuner clarifie les idées."
+                },
+                {
+                    thematic: "Équilibre",
+                    question: "Pourquoi planifier sa vie chaque semaine ?",
+                    options: [
+                        "Parce que c'est obligatoire",
+                        "Pour mieux gérer son temps et ses objectifs",
+                        "Pour se stresser",
+                        "Pour remplir un agenda"
+                    ],
+                    correctAnswer: "Pour mieux gérer son temps et ses objectifs",
+                    explanation: "Bloquez 1h chaque dimanche pour planifier la semaine avec un bullet journal.",
+                    tip: "Revoyez vos priorités chaque semaine."
+                },
+                {
+                    thematic: "Équilibre",
+                    question: "Quel est l'intérêt d'avoir un projet vert ou naturel (jardin, plantes) ?",
+                    options: [
+                        "C'est à la mode",
+                        "Cela apporte sérénité, fierté et connexion à la nature",
+                        "Pour économiser sur les légumes",
+                        "Aucun"
+                    ],
+                    correctAnswer: "Cela apporte sérénité, fierté et connexion à la nature",
+                    explanation: "Cultiver des herbes aromatiques sur le balcon est accessible à tous.",
+                    tip: "Le jardinage réduit le stress."
+                },
+                {
+                    thematic: "Équilibre",
+                    question: "Comment pratiquer la gratitude concrètement ?",
+                    options: [
+                        "En achetant des choses",
+                        "En notant chaque soir trois bonheurs de la journée",
+                        "En se vantant",
+                        "En ignorant les problèmes"
+                    ],
+                    correctAnswer: "En notant chaque soir trois bonheurs de la journée",
+                    explanation: "Dites 'Alhamdoulillah' pour ces trois choses, cela recentre sur le positif.",
+                    tip: "La gratitude attire l'abondance."
+                },
+                {
+                    thematic: "Équilibre",
+                    question: "Quelle est une conséquence du burn-out selon les REX ?",
+                    options: [
+                        "Plus d'énergie",
+                        "Moins de capacité à saisir les opportunités",
+                        "Une promotion",
+                        "Une meilleure santé"
+                    ],
+                    correctAnswer: "Moins de capacité à saisir les opportunités",
+                    explanation: "Travailler 12h par jour sans sommeil ni sport mène à l'épuisement.",
+                    tip: "Préservez votre santé pour être performant durablement."
+                },
+                {
+                    thematic: "Équilibre",
+                    question: "Pourquoi est-il dangereux de négliger sa santé ?",
+                    options: [
+                        "Parce qu'on peut rater des opportunités quand on est malade",
+                        "Parce que c'est mal vu",
+                        "Parce que cela coûte cher",
+                        "Aucune raison"
+                    ],
+                    correctAnswer: "Parce qu'on peut rater des opportunités quand on est malade",
+                    explanation: "Un corps sain est le véhicule d'un esprit performant.",
+                    tip: "Intégrez une activité physique régulière."
+                },
+                {
+                    thematic: "Équilibre",
+                    question: "Quelle est la recommandation pour la planification personnelle ?",
+                    options: [
+                        "Ne rien planifier, suivre le flux",
+                        "Utiliser un bullet journal ou un agenda pour suivre objectifs et tâches",
+                        "Se fier à sa mémoire",
+                        "Noter sur des post-it partout"
+                    ],
+                    correctAnswer: "Utiliser un bullet journal ou un agenda pour suivre objectifs et tâches",
+                    explanation: "Une planification écrite libère l'esprit et permet de prioriser.",
+                    tip: "Testez la méthode Getting Things Done (GTD)."
+                },
+                {
+                    thematic: "Équilibre",
+                    question: "Comment éviter la procrastination ?",
+                    options: [
+                        "En attendant l'inspiration",
+                        "En découpant les tâches en petites actions et en commençant par la plus facile",
+                        "En travaillant sans pause",
+                        "En se fixant des objectifs flous"
+                    ],
+                    correctAnswer: "En découpant les tâches en petites actions et en commençant par la plus facile",
+                    explanation: "La technique Pomodoro (25 minutes de travail, 5 de pause) est efficace.",
+                    tip: "Éliminez les distractions (téléphone en mode avion)."
+                },
+                {
+                    thematic: "Équilibre",
+                    question: "Quel est l'impact du sport régulier sur la chance ?",
+                    options: [
+                        "Aucun",
+                        "Il améliore la santé, donc l'énergie et la capacité à agir",
+                        "Il fait perdre du temps",
+                        "Il est réservé aux sportifs"
+                    ],
+                    correctAnswer: "Il améliore la santé, donc l'énergie et la capacité à agir",
+                    explanation: "Plus d'énergie permet de saisir plus d'opportunités.",
+                    tip: "30 minutes de marche rapide par jour suffisent."
+                },
+
+                // ============ THÈME 6: BONNES PRATIQUES (8) ============
+                {
+                    thematic: "Bonnes pratiques",
+                    question: "Selon le REX, quelle est la première bonne pratique ?",
+                    options: [
+                        "Attendre que ça vienne",
+                        "Se fixer des objectifs clairs et mesurables",
+                        "Travailler sans objectif",
+                        "Suivre son intuition"
+                    ],
+                    correctAnswer: "Se fixer des objectifs clairs et mesurables",
+                    explanation: "Exemple : 'je veux obtenir une certification en data d'ici 6 mois en étudiant 3h/semaine'.",
+                    tip: "Utilisez la méthode SMART (Spécifique, Mesurable, Atteignable, Réaliste, Temporel)."
+                },
+                {
+                    thematic: "Bonnes pratiques",
+                    question: "Comment entretenir son réseau avec authenticité ?",
+                    options: [
+                        "Envoyer des messages groupés",
+                        "Féliciter un collègue pour sa promotion, proposer son aide sans rien attendre",
+                        "Ne contacter que pour demander",
+                        "Ajouter tout le monde sur LinkedIn"
+                    ],
+                    correctAnswer: "Féliciter un collègue pour sa promotion, proposer son aide sans rien attendre",
+                    explanation: "Les relations sincères créent des opportunités durables.",
+                    tip: "Prenez des nouvelles régulièrement, même sans raison."
+                },
+                {
+                    thematic: "Bonnes pratiques",
+                    question: "Pourquoi la gratitude est-elle considérée comme une bonne pratique ?",
+                    options: [
+                        "Parce qu'elle fait plaisir",
+                        "Parce qu'elle recentre sur le positif et attire l'abondance",
+                        "Parce que c'est une obligation religieuse",
+                        "Parce que tout le monde le fait"
+                    ],
+                    correctAnswer: "Parce qu'elle recentre sur le positif et attire l'abondance",
+                    explanation: "Notez 3 choses pour lesquelles vous êtes reconnaissant chaque soir.",
+                    tip: "La gratitude renforce la résilience."
+                },
+                {
+                    thematic: "Bonnes pratiques",
+                    question: "Pourquoi se former en continu est essentiel ?",
+                    options: [
+                        "Pour avoir un diplôme de plus",
+                        "Parce que le marché évolue et qu'il faut rester pertinent",
+                        "Pour gagner plus d'argent immédiatement",
+                        "Pour changer de métier"
+                    ],
+                    correctAnswer: "Parce que le marché évolue et qu'il faut rester pertinent",
+                    explanation: "Suivez une formation en ligne sur l'IA, la gestion de projet agile, ou la prise de parole.",
+                    tip: "Consacrez 1h par semaine à l'apprentissage."
+                },
+                {
+                    thematic: "Bonnes pratiques",
+                    question: "Que signifie 'prendre des risques calculés' ?",
+                    options: [
+                        "Sauter sans filet",
+                        "Évaluer les gains et les pertes possibles avant d'agir",
+                        "Ne jamais prendre de risque",
+                        "Suivre la foule"
+                    ],
+                    correctAnswer: "Évaluer les gains et les pertes possibles avant d'agir",
+                    explanation: "Exemple : proposez une idée innovante à votre manager, lancez un petit business en parallèle.",
+                    tip: "Calculez le pire scénario : est-il acceptable ?"
+                },
+                {
+                    thematic: "Bonnes pratiques",
+                    question: "Quelle habitude aide à rester concentré sur ses objectifs ?",
+                    options: [
+                        "Regarder la télévision",
+                        "Revoir ses objectifs chaque matin",
+                        "Travailler sans liste",
+                        "Faire plusieurs choses à la fois"
+                    ],
+                    correctAnswer: "Revoir ses objectifs chaque matin",
+                    explanation: "Cela permet de garder le cap et d'ajuster ses actions.",
+                    tip: "Placez-les dans un endroit visible."
+                },
+                {
+                    thematic: "Bonnes pratiques",
+                    question: "Comment transformer un échec en tremplin ?",
+                    options: [
+                        "L'oublier",
+                        "En tirer une leçon et ajuster sa stratégie",
+                        "Se décourager",
+                        "Chercher un coupable"
+                    ],
+                    correctAnswer: "En tirer une leçon et ajuster sa stratégie",
+                    explanation: "Chaque échec est une donnée pour progresser.",
+                    tip: "Tenez un journal des échecs et des apprentissages."
+                },
+                {
+                    thematic: "Bonnes pratiques",
+                    question: "Pourquoi est-il bon de partager ses idées avec d'autres ?",
+                    options: [
+                        "Pour qu'ils les volent",
+                        "Pour obtenir des retours constructifs et des opportunités",
+                        "Pour se vanter",
+                        "Parce que c'est obligatoire"
+                    ],
+                    correctAnswer: "Pour obtenir des retours constructifs et des opportunités",
+                    explanation: "En partageant, vous pouvez trouver un associé ou un mentor.",
+                    tip: "Soyez ouvert aux critiques."
+                },
+
+                // ============ THÈME 7: ERREURS FRÉQUENTES (8) ============
+                {
+                    thematic: "Erreurs",
+                    question: "Quelle est l'erreur numéro 1 selon le REX ?",
+                    options: [
+                        "Travailler trop",
+                        "Attendre que les opportunités viennent sans agir",
+                        "Prendre trop de risques",
+                        "Se former trop"
+                    ],
+                    correctAnswer: "Attendre que les opportunités viennent sans agir",
+                    explanation: "Sans action, on reste dépendant. Exemple : espérer une promotion sans jamais demander plus de responsabilités.",
+                    tip: "Agissez, même petit."
+                },
+                {
+                    thematic: "Erreurs",
+                    question: "Pourquoi négliger sa santé est une erreur ?",
+                    options: [
+                        "Parce que ça coûte cher",
+                        "Parce que le burn-out réduit la capacité à saisir les opportunités",
+                        "Parce que c'est mal vu",
+                        "Parce qu'on grossit"
+                    ],
+                    correctAnswer: "Parce que le burn-out réduit la capacité à saisir les opportunités",
+                    explanation: "Travailler 12h par jour sans sommeil ni sport jusqu'à l'épuisement vous rendra moins performant.",
+                    tip: "La santé est votre capital le plus précieux."
+                },
+                {
+                    thematic: "Erreurs",
+                    question: "Que risque-t-on à ignorer les feedbacks ?",
+                    options: [
+                        "De devenir meilleur",
+                        "De répéter les mêmes échecs",
+                        "D'être apprécié",
+                        "D'obtenir une promotion"
+                    ],
+                    correctAnswer: "De répéter les mêmes échecs",
+                    explanation: "Refuser d'écouter les critiques sur un projet et continuer sans ajustement mène à l'échec.",
+                    tip: "Remerciez toujours la personne qui vous fait un retour."
+                },
+                {
+                    thematic: "Erreurs",
+                    question: "Pourquoi rester dans sa zone de confort est-il néfaste ?",
+                    options: [
+                        "Parce qu'on y est bien",
+                        "Parce qu'on ne développe pas de nouvelles compétences",
+                        "Parce que c'est fatiguant",
+                        "Parce que tout le monde le fait"
+                    ],
+                    correctAnswer: "Parce qu'on ne développe pas de nouvelles compétences",
+                    explanation: "Refuser une mission à l'étranger par peur de l'inconnu vous prive d'opportunités.",
+                    tip: "Sortez de votre zone de confort progressivement."
+                },
+                {
+                    thematic: "Erreurs",
+                    question: "Quel est l'effet de la procrastination ?",
+                    options: [
+                        "Elle permet de mieux réfléchir",
+                        "Elle retarde l'action et fait rater des occasions",
+                        "Elle est sans conséquence",
+                        "Elle est recommandée"
+                    ],
+                    correctAnswer: "Elle retarde l'action et fait rater des occasions",
+                    explanation: "Les bonnes intentions sans exécution régulière ne mènent à rien.",
+                    tip: "Utilisez la règle des 2 minutes : si une tâche prend moins de 2 minutes, faites-la immédiatement."
+                },
+                {
+                    thematic: "Erreurs",
+                    question: "Quelle erreur concerne le réseau ?",
+                    options: [
+                        "Aider les autres",
+                        "Ne contacter ses relations que quand on a besoin d'elles",
+                        "Partager ses réussites",
+                        "Féliciter ses collègues"
+                    ],
+                    correctAnswer: "Ne contacter ses relations que quand on a besoin d'elles",
+                    explanation: "Cela donne l'impression de n'être intéressé que par ce qu'elles peuvent apporter.",
+                    tip: "Entretenez le lien même sans raison."
+                },
+                {
+                    thematic: "Erreurs",
+                    question: "Quel est le risque de ne pas se fixer d'objectifs clairs ?",
+                    options: [
+                        "On avance plus vite",
+                        "On erre sans direction et on se disperse",
+                        "On est plus flexible",
+                        "On ne stresse pas"
+                    ],
+                    correctAnswer: "On erre sans direction et on se disperse",
+                    explanation: "Sans objectifs, on ne sait pas où concentrer ses efforts.",
+                    tip: "Écrivez vos objectifs pour les rendre concrets."
+                },
+                {
+                    thematic: "Erreurs",
+                    question: "Pourquoi le manque de discipline est-il un frein ?",
+                    options: [
+                        "Parce qu'il faut toujours être motivé",
+                        "Parce que sans discipline, les bonnes intentions ne se concrétisent pas",
+                        "Parce que c'est mal vu",
+                        "Parce que cela fatigue"
+                    ],
+                    correctAnswer: "Parce que sans discipline, les bonnes intentions ne se concrétisent pas",
+                    explanation: "La motivation fluctue, la discipline maintient le cap.",
+                    tip: "Créez des habitudes plutôt que d'attendre la motivation."
+                },
+
+                // ============ THÈME 8: CONCEPTS CLÉS (10) ============
+                {
+                    thematic: "Concepts",
+                    question: "Comment définir la chance selon l'audit ?",
+                    options: [
+                        "Un hasard total",
+                        "Opportunité + Préparation + Action",
+                        "Un don du ciel",
+                        "Une question de destin"
+                    ],
+                    correctAnswer: "Opportunité + Préparation + Action",
+                    explanation: "Si une opportunité arrive et que vous êtes prêt, les gens diront : 'Quelle chance !'.",
+                    tip: "La chance est un muscle qui se cultive."
+                },
+                {
+                    thematic: "Concepts",
+                    question: "Que signifie le proverbe 'la chance sourit aux audacieux' ?",
+                    options: [
+                        "Les audacieux sont toujours chanceux",
+                        "Prendre des risques calculés augmente les opportunités",
+                        "Il faut être téméraire",
+                        "L'audace remplace la compétence"
+                    ],
+                    correctAnswer: "Prendre des risques calculés augmente les opportunités",
+                    explanation: "Sortir de sa zone de confort ouvre des portes que les prudents n'atteignent pas.",
+                    tip: "Osez, mais en mesurant les risques."
+                },
+                {
+                    thematic: "Concepts",
+                    question: "Quelle est la différence entre discipline et motivation ?",
+                    options: [
+                        "Aucune",
+                        "La motivation est fluctuante, la discipline est constante",
+                        "La discipline est innée, la motivation s'acquiert",
+                        "La motivation est plus importante"
+                    ],
+                    correctAnswer: "La motivation est fluctuante, la discipline est constante",
+                    explanation: "La discipline permet d'agir même quand la motivation n'est pas là.",
+                    tip: "Construisez des routines pour automatiser les bonnes actions."
+                },
+                {
+                    thematic: "Concepts",
+                    question: "Pourquoi dit-on que l'échec est une étape vers le succès ?",
+                    options: [
+                        "Parce que tout le monde échoue",
+                        "Parce qu'il apporte des enseignements précieux",
+                        "Parce qu'il faut échouer pour réussir",
+                        "Parce que c'est une excuse"
+                    ],
+                    correctAnswer: "Parce qu'il apporte des enseignements précieux",
+                    explanation: "Chaque erreur est une expérience qui affine votre stratégie.",
+                    tip: "Adoptez un état d'esprit de croissance (growth mindset)."
+                },
+                {
+                    thematic: "Concepts",
+                    question: "Que signifie 'être au bon endroit au bon moment' ?",
+                    options: [
+                        "C'est purement le hasard",
+                        "C'est le résultat d'une présence active dans des lieux stratégiques",
+                        "C'est impossible à contrôler",
+                        "C'est une question de chance"
+                    ],
+                    correctAnswer: "C'est le résultat d'une présence active dans des lieux stratégiques",
+                    explanation: "En allant à des conférences, meetups, etc., vous augmentez les probabilités de croiser la bonne personne.",
+                    tip: "Multipliez les occasions de rencontres."
+                },
+                {
+                    thematic: "Concepts",
+                    question: "Quel est le rôle de la préparation dans la chance ?",
+                    options: [
+                        "Aucun",
+                        "Elle permet de reconnaître et de saisir l'opportunité quand elle se présente",
+                        "Elle remplace l'opportunité",
+                        "Elle est secondaire"
+                    ],
+                    correctAnswer: "Elle permet de reconnaître et de saisir l'opportunité quand elle se présente",
+                    explanation: "Sans préparation, on ne voit même pas l'opportunité ou on n'est pas capable de l'exploiter.",
+                    tip: "Investissez dans vos compétences en continu."
+                },
+                {
+                    thematic: "Concepts",
+                    question: "Comment le réseau peut-il créer de la chance ?",
+                    options: [
+                        "En vous recommandant spontanément",
+                        "En vous offrant des cadeaux",
+                        "En vous invitant à des fêtes",
+                        "En vous donnant de l'argent"
+                    ],
+                    correctAnswer: "En vous recommandant spontanément",
+                    explanation: "Quand une opportunité se présente, vos contacts pensent à vous.",
+                    tip: "Soyez une personne ressource, on pensera à vous."
+                },
+                {
+                    thematic: "Concepts",
+                    question: "Pourquoi la gratitude attire-t-elle la chance ?",
+                    options: [
+                        "C'est une croyance sans fondement",
+                        "Parce qu'elle rend plus heureux et plus ouvert aux opportunités",
+                        "Parce que les gens aiment les personnes reconnaissantes",
+                        "Parce que c'est une loi universelle"
+                    ],
+                    correctAnswer: "Parce qu'elle rend plus heureux et plus ouvert aux opportunités",
+                    explanation: "Un état d'esprit positif permet de voir les opportunités là où d'autres ne voient que des problèmes.",
+                    tip: "Pratiquez la gratitude pour changer votre perception."
+                },
+                {
+                    thematic: "Concepts",
+                    question: "Qu'est-ce que la résilience ?",
+                    options: [
+                        "La capacité à encaisser les coups sans broncher",
+                        "La capacité à rebondir après un échec",
+                        "L'aptitude à prévoir l'avenir",
+                        "La force physique"
+                    ],
+                    correctAnswer: "La capacité à rebondir après un échec",
+                    explanation: "Les personnes chanceuses sont celles qui persistent malgré les revers.",
+                    tip: "Cultivez la résilience en voyant l'échec comme un feedback."
+                },
+                {
+                    thematic: "Concepts",
+                    question: "Quel est le lien entre action et opportunité ?",
+                    options: [
+                        "L'action crée l'opportunité",
+                        "L'opportunité vient sans action",
+                        "Elles sont indépendantes",
+                        "L'action est inutile"
+                    ],
+                    correctAnswer: "L'action crée l'opportunité",
+                    explanation: "En agissant, on se confronte au monde et on génère des occasions.",
+                    tip: "N'attendez pas le moment parfait, commencez."
+                }
+            ]
+        };
+
+        // ------------------------------------------------------------
+        // DOM Elements
+        // ------------------------------------------------------------
+        const settingsPanel = document.getElementById('settings-panel');
+        const quizContent = document.getElementById('quiz-content');
+        const questionCountSelect = document.getElementById('question-count');
+        const startBtn = document.getElementById('start-quiz-btn');
+        const questionCounter = document.getElementById('question-counter');
+        const currentScoreSpan = document.getElementById('current-score');
+        const progressBar = document.getElementById('progress-bar');
+        const questionText = document.getElementById('question-text');
+        const thematicBadge = document.getElementById('thematic-badge');
+        const optionsContainer = document.getElementById('options-container');
+        const explanationBox = document.getElementById('explanation-box');
+        const explanationTitle = document.getElementById('explanation-title');
+        const explanationText = document.getElementById('explanation-text');
+        const tipBox = document.getElementById('tip-box');
+        const tipText = document.getElementById('tip-text');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const finishBtn = document.getElementById('finish-btn');
+        const restartQuizBtn = document.getElementById('restart-quiz-btn');
+        
+        // Modal elements
+        const resultsModal = new bootstrap.Modal(document.getElementById('resultsModal'));
+        const finalScoreCorrect = document.getElementById('final-score-correct');
+        const finalScoreTotal = document.getElementById('final-score-total');
+        const finalScorePercentage = document.getElementById('final-score-percentage');
+        const finalRecommendations = document.getElementById('final-recommendations');
+        const strengthsEl = document.getElementById('strengths');
+        const weaknessesEl = document.getElementById('weaknesses');
+        const skillElements = {
+            preparation: document.getElementById('skill-preparation'),
+            action: document.getElementById('skill-action'),
+            reseau: document.getElementById('skill-reseau'),
+            spirituel: document.getElementById('skill-spirituel'),
+            equilibre: document.getElementById('skill-equilibre'),
+            bonnes: document.getElementById('skill-bonnes')
+        };
+
+        // Mapping des thèmes pour les badges et les scores
+        const thematicMapping = {
+            "Préparation": "preparation",
+            "Action": "action",
+            "Réseau": "reseau",
+            "Spirituel": "spirituel",
+            "Équilibre": "equilibre",
+            "Bonnes pratiques": "bonnes",
+            "Erreurs": "erreurs", // non affiché dans les skills mais utilisé pour le filtre
+            "Concepts": "concepts"
+        };
+
+        // Badge classes mapping
+        const badgeClassMap = {
+            "Préparation": "badge-preparation",
+            "Action": "badge-action",
+            "Réseau": "badge-reseau",
+            "Spirituel": "badge-spirituel",
+            "Équilibre": "badge-equilibre",
+            "Bonnes pratiques": "badge-bonnes",
+            "Erreurs": "badge-erreurs",
+            "Concepts": "badge-concepts"
+        };
+
+        // État du quiz
+        let currentIndex = 0;
+        let score = 0;
+        let userAnswers = [];
+        let questions = [];
+        let selectedCount = 80;
+
+        // ------------------------------------------------------------
+        // Fonctions utilitaires
+        // ------------------------------------------------------------
+        function shuffleArray(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        function filterQuestionsByDomain() {
+            const domains = {
+                'domain-preparation': "Préparation",
+                'domain-action': "Action",
+                'domain-reseau': "Réseau",
+                'domain-spirituel': "Spirituel",
+                'domain-equilibre': "Équilibre",
+                'domain-bonnes': "Bonnes pratiques",
+                'domain-erreurs': "Erreurs",
+                'domain-concepts': "Concepts"
+            };
+            
+            const selected = [];
+            for (const [id, theme] of Object.entries(domains)) {
+                if (document.getElementById(id).checked) {
+                    selected.push(theme);
+                }
+            }
+            
+            if (selected.length === 0) return [...quizData.questions];
+            return quizData.questions.filter(q => selected.includes(q.thematic));
+        }
+
+        function startQuiz() {
+            selectedCount = parseInt(questionCountSelect.value);
+            let filtered = filterQuestionsByDomain();
+            
+            if (filtered.length === 0) {
+                alert("Veuillez sélectionner au moins un thème.");
+                return;
+            }
+            
+            if (filtered.length < selectedCount) {
+                alert(`Seulement ${filtered.length} questions disponibles. Le quiz continuera avec ${filtered.length} questions.`);
+                selectedCount = filtered.length;
+            }
+            
+            const shuffled = shuffleArray(filtered);
+            questions = shuffled.slice(0, selectedCount);
+            
+            currentIndex = 0;
+            score = 0;
+            userAnswers = new Array(questions.length).fill(null);
+            
+            settingsPanel.classList.add('d-none');
+            quizContent.classList.remove('d-none');
+            
+            displayQuestion(currentIndex);
+            updateScore();
+            resultsModal.hide();
+        }
+
+        function displayQuestion(index) {
+            explanationBox.classList.add('d-none');
+            tipBox.classList.add('d-none');
+            
+            const q = questions[index];
+            questionText.textContent = q.question;
+            thematicBadge.textContent = q.thematic;
+            thematicBadge.className = 'thematic-badge ' + (badgeClassMap[q.thematic] || 'badge-preparation');
+            
+            optionsContainer.innerHTML = '';
+            q.options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'btn option-btn';
+                btn.textContent = opt;
+                btn.onclick = () => selectAnswer(btn, opt, index);
+                optionsContainer.appendChild(btn);
+            });
+            
+            updateNavButtons();
+            updateProgressBar();
+            
+            if (userAnswers[index] !== null) {
+                showAnswerFeedback(index);
+            }
+        }
+
+        function selectAnswer(btn, selected, index) {
+            if (userAnswers[index] !== null) return;
+            
+            const q = questions[index];
+            const isCorrect = selected === q.correctAnswer;
+            
+            userAnswers[index] = {
+                selected: selected,
+                correct: q.correctAnswer,
+                isCorrect: isCorrect
+            };
+            
+            if (isCorrect) score++;
+            updateScore();
+            showAnswerFeedback(index);
+        }
+
+        function showAnswerFeedback(index) {
+            const ans = userAnswers[index];
+            if (!ans) return;
+            
+            const q = questions[index];
+            const optionBtns = optionsContainer.querySelectorAll('.option-btn');
+            optionBtns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.textContent === ans.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.textContent === ans.selected) {
+                    btn.classList.add('incorrect');
+                }
+            });
+            
+            explanationText.textContent = q.explanation;
+            if (ans.isCorrect) {
+                explanationTitle.textContent = "✅ Bonne réponse !";
+                explanationBox.className = 'explanation-correct';
+            } else {
+                explanationTitle.textContent = "💡 Explication";
+                explanationBox.className = 'explanation-incorrect';
+            }
+            explanationBox.classList.remove('d-none');
+            
+            if (q.tip) {
+                tipText.textContent = q.tip;
+                tipBox.classList.remove('d-none');
+            }
+        }
+
+        function updateNavButtons() {
+            prevBtn.disabled = currentIndex === 0;
+            if (currentIndex === questions.length - 1) {
+                nextBtn.classList.add('d-none');
+                finishBtn.classList.remove('d-none');
+            } else {
+                nextBtn.classList.remove('d-none');
+                finishBtn.classList.add('d-none');
+            }
+        }
+
+        function updateProgressBar() {
+            const percent = ((currentIndex + 1) / questions.length) * 100;
+            progressBar.style.width = percent + '%';
+            progressBar.setAttribute('aria-valuenow', percent);
+            questionCounter.textContent = `Question ${currentIndex + 1} / ${questions.length}`;
+        }
+
+        function updateScore() {
+            currentScoreSpan.textContent = `Score: ${score}/${questions.length}`;
+        }
+
+        function handleNext() {
+            if (currentIndex < questions.length - 1) {
+                currentIndex++;
+                displayQuestion(currentIndex);
+            }
+        }
+
+        function handlePrev() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                displayQuestion(currentIndex);
+            }
+        }
+
+        function calculateSkillScores() {
+            // Initialiser les compteurs par thème
+            const counts = {};
+            for (const theme of Object.keys(thematicMapping)) {
+                counts[theme] = { total: 0, correct: 0 };
+            }
+            
+            userAnswers.forEach((ans, idx) => {
+                if (ans !== null) {
+                    const theme = questions[idx].thematic;
+                    if (counts[theme]) {
+                        counts[theme].total++;
+                        if (ans.isCorrect) counts[theme].correct++;
+                    }
+                }
+            });
+            
+            // Mettre à jour les barres de compétences (uniquement pour les 6 premières)
+            const skills = ['preparation', 'action', 'reseau', 'spirituel', 'equilibre', 'bonnes'];
+            skills.forEach(skill => {
+                const themeName = Object.keys(thematicMapping).find(key => thematicMapping[key] === skill);
+                if (themeName && counts[themeName] && counts[themeName].total > 0) {
+                    const percent = (counts[themeName].correct / counts[themeName].total) * 100;
+                    skillElements[skill].style.width = percent + '%';
+                } else {
+                    skillElements[skill].style.width = '0%';
+                }
+            });
+            
+            return counts;
+        }
+
+        function showFinalResults() {
+            const counts = calculateSkillScores();
+            const percentage = (score / questions.length) * 100;
+            finalScoreCorrect.textContent = score;
+            finalScoreTotal.textContent = questions.length;
+            finalScorePercentage.textContent = `${percentage.toFixed(0)}%`;
+            
+            // Recommandations personnalisées
+            let level = "";
+            let strengths = [];
+            let weaknesses = [];
+            
+            for (const [theme, vals] of Object.entries(counts)) {
+                if (vals.total > 0) {
+                    const percent = (vals.correct / vals.total) * 100;
+                    if (percent >= 75) strengths.push(theme);
+                    else if (percent < 50) weaknesses.push(theme);
+                }
+            }
+            
+            if (percentage >= 80) {
+                level = "🍀 Exceptionnel ! Vous êtes un véritable aimant à chance. Continuez à cultiver ces habitudes.";
+            } else if (percentage >= 60) {
+                level = "👍 Bon niveau ! Vous avez les bases, mais quelques domaines méritent d'être renforcés.";
+            } else {
+                level = "🌱 En progrès ! Chaque question est une opportunité d'apprendre. Persévérez !";
+            }
+            
+            strengthsEl.textContent = strengths.length > 0 ? strengths.join(", ") : "Aucun point fort dominant, continuez à travailler tous les domaines.";
+            weaknessesEl.textContent = weaknesses.length > 0 ? weaknesses.join(", ") : "Aucune faiblesse majeure, mais restez vigilant.";
+            
+            finalRecommendations.innerHTML = `
+                <h5><i class="fas fa-star"></i> ${level}</h5>
+                <p>Votre score : ${score}/${questions.length} (${percentage.toFixed(0)}%)</p>
+            `;
+            
+            resultsModal.show();
+        }
+
+        function restartQuiz() {
+            settingsPanel.classList.remove('d-none');
+            quizContent.classList.add('d-none');
+            resultsModal.hide();
+        }
+
+        // ------------------------------------------------------------
+        // Event Listeners
+        // ------------------------------------------------------------
+        startBtn.addEventListener('click', startQuiz);
+        nextBtn.addEventListener('click', handleNext);
+        prevBtn.addEventListener('click', handlePrev);
+        finishBtn.addEventListener('click', showFinalResults);
+        restartQuizBtn.addEventListener('click', restartQuiz);
+
+        // Initialisation : cacher le quiz au chargement
+        document.addEventListener('DOMContentLoaded', () => {
+            settingsPanel.classList.remove('d-none');
+            quizContent.classList.add('d-none');
+        });
+    </script>
+</body>
+</html>
